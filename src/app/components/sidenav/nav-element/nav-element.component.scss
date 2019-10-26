@@ -1,0 +1,23 @@
+@import 'abstracts/variables';
+
+mat-list-item{
+    width: 100%;
+    color: $nav-text-color;
+}
+
+mat-list-item a{
+    text-decoration: none;
+    color: $nav-text-color;
+}
+
+mat-list-item i{
+    margin-right: 10px;
+    color: $nav-text-color;
+    position: relative;
+    top: $nav-icon-pos;
+}
+
+mat-list-item:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s linear;
+}

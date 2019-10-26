@@ -1,0 +1,29 @@
+@import 'abstracts/variables';
+
+.nav-container{
+    padding-left: 10px;
+    display:flex;
+    flex-direction: column;
+}
+
+.content{
+    display:flex;
+}
+
+.content button{
+    margin: $nav-button-margin;
+}
+
+.content-container{
+    margin: $content-margin;
+    min-width: $content-min-width;
+}
+
+mat-sidenav-container{
+    height: 100%;
+}
+
+mat-sidenav{
+    background: $nav-background;
+    width: $nav-width;
+}

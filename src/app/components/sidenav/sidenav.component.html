@@ -1,0 +1,37 @@
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="mat-elevation-z8">
+        <div class="nav-container">
+        
+            <div class="sidenav-header">
+                <h1>simplyCare</h1>
+
+            </div>
+
+            <div class="sidenav-nav">
+                <mat-list role="list">
+                    <app-nav-element icon="reorder" name="Site Model" link="/site-model"></app-nav-element>
+                    <app-nav-element icon="navigation" name="Mission Control" link="/site-model"></app-nav-element>
+                    <app-nav-element icon="dashboard" name="Planner" link="/site-model"></app-nav-element>
+                </mat-list>
+            </div>
+
+            
+        </div>
+        
+    </mat-sidenav>
+
+    <!--Outside Sidenav-->
+    <mat-sidenav-content>
+        <div class="content">
+            <button mat-fab (click)="sidenav.toggle()" color="primary">
+                <i class="material-icons">menu_open</i>
+            </button>
+            <!--router outlet-->
+            <div class="content-container">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
