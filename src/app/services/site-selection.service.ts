@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SiteSelectionServiceService {
+export class SiteSelectionService {
 
   // Observable string source
   private siteSelectionSource = new Subject<string>();

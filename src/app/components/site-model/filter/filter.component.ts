@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api-service.service';
 import { IArea } from 'src/classes/interfaces/IArea';
-import { SiteSelectionServiceService } from 'src/app/services/site-selection-service.service';
+import { SiteSelectionService } from 'src/app/services/site-selection.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -19,7 +19,7 @@ export class FilterComponent implements OnInit {
   selectedSiteId = 'no site selected';
   subscription: Subscription;
 
-  constructor(private siteSelection:SiteSelectionServiceService, private api:ApiService, ) {
+  constructor(private siteSelection:SiteSelectionService, private api:ApiService, ) {
     console.log("Consume site from site selection service")
     /*this.siteSelection.siteSelected$.subscribe (
       selectedSiteId => {

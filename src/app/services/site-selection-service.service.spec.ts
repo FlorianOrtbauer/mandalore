@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SiteSelectionServiceService } from './site-selection-service.service';
+import { SiteSelectionService } from './site-selection.service';
 
 describe('SiteSelectionServiceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: SiteSelectionServiceService = TestBed.get(SiteSelectionServiceService);
+    const service: SiteSelectionService = TestBed.get(SiteSelectionService);
     expect(service).toBeTruthy();
   });
 });
