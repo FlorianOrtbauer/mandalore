@@ -11,11 +11,13 @@ export class FilterComponent implements OnInit {
   areas: IArea[];
   selectedArea: IArea; 
   selectedAreaId: string; 
+  
   @Output() areaChanged = new EventEmitter<IArea>();
 
   constructor(private api:ApiService) {
     this.getSites();
   }
+
   getSites = () => {
     this.api.getAllAreas().subscribe (
       data => {
@@ -30,6 +32,7 @@ export class FilterComponent implements OnInit {
   changeArea(){
     this.selectedArea = this.areas.find(element => element.id === this.selectedAreaId);
     this.areaChanged.emit(this.selectedArea); 
+    console.log(this.selectedArea.id);
   }
 
   ngOnInit() {

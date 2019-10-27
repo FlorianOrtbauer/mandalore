@@ -18,7 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatGridListModule} from '@angular/material/grid-list'; 
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input'; 
-import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NavElementComponent } from './components/sidenav/nav-element/nav-element.component';
@@ -28,7 +28,8 @@ import { ComponentsComponent } from './components/site-model/components/componen
 import { MissionsComponent } from './components/site-model/missions/missions.component';
 import { FilterComponent } from './components/site-model/filter/filter.component';
 import { SystemsComponent } from './components/site-model/systems/systems.component';
-
+import { SystemCruComponent } from './components/site-model/dialogs/system-cru/system-cru.component';
+import { SiteSelectorComponent } from './components/sidenav/site-selector/site-selector.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,9 @@ import { SystemsComponent } from './components/site-model/systems/systems.compon
     ComponentsComponent,
     MissionsComponent,
     FilterComponent,
-    SystemsComponent
+    SystemsComponent,
+    SystemCruComponent,
+    SiteSelectorComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,7 @@ import { SystemsComponent } from './components/site-model/systems/systems.compon
     MatGridListModule,
     MatTableModule,
     MatInputModule,
-    MatDialogModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

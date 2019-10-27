@@ -27,11 +27,18 @@ export class ApiService {
     return this.http.get<IArea[]>(this.baseurl+"/millenniumfalcon/areas", {headers: this.httpHeaders});
   }
 
-  getAllSystems(areaId): Observable<ISystem[]>{
+  getAllSystems(): Observable<ISystem[]>{
+    return this.http.get<ISystem[]>(this.baseurl+"/millenniumfalcon/systems", {headers: this.httpHeaders});
+  }
+
+  getSystemsByArea(areaId): Observable<ISystem[]>{
     return this.http.get<ISystem[]>(this.baseurl+"/millenniumfalcon/systems?area_id=" + areaId, {headers: this.httpHeaders});
   }
 
-  getAllComponents(systemsId): Observable<IComponent[]>{
+  getAllComponents(): Observable<IComponent[]>{
+    return this.http.get<IComponent[]>(this.baseurl+"/millenniumfalcon/components", {headers: this.httpHeaders});
+  }
+  getComponentBySystem(systemsId): Observable<IComponent[]>{
     return this.http.get<IComponent[]>(this.baseurl+"/millenniumfalcon/components?system_id=" + systemsId, {headers: this.httpHeaders});
   }
 }

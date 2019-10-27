@@ -1,11 +1,10 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api-service.service';
-import {MatDialog, MatDialogConfig} from "@angular/material";
-//import { AddSystemDialogComponent } from '../dialogs/add-system-dialog/add-system-dialog.component';
+import { MatDialog, MatDialogConfig } from "@angular/material";
+import { SystemCruComponent } from '../dialogs/system-cru/system-cru.component';
 import { ISystem } from 'src/classes/interfaces/ISystem';
 import { IArea } from 'src/classes/interfaces/IArea';
-
 
 export interface SystemComponent {
   name: string;
@@ -21,8 +20,8 @@ export interface SystemComponent {
 export class SystemsComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'priority'];
-  dataSource: MatTableDataSource < ISystem > ;
-  selectedSystems: ISystem[] = []; 
+  dataSource: MatTableDataSource <ISystem> ;
+  selectedSystems: ISystem[] = [];
   isSelected: boolean = true; 
   @Input() selectedArea: IArea; 
   @Output() systemsChanged = new EventEmitter<ISystem[]>();
@@ -30,11 +29,11 @@ export class SystemsComponent implements OnInit {
   constructor(private api:ApiService, private dialog: MatDialog) {}
 
   getSystems() {
-    this.api.getAllSystems(this.selectedArea.id).subscribe (
+    this.api.getSystemsByArea(this.selectedArea.id).subscribe (
       data => {
         data.forEach(element => {
           element.area = this.selectedArea; 
-        });
+          });
         this.dataSource = new MatTableDataSource(data);  
       },
       error => {
@@ -68,6 +67,22 @@ export class SystemsComponent implements OnInit {
       this.selectedSystems = this.selectedSystems.slice(); //needed for event because no detection on content change
       this.systemsChanged.emit(this.selectedSystems);
     }
+  }
+  
+  openDialog() {
+
+    if(this.selectedArea == null)
+    {
+      alert("No area selected!"); 
+      return; 
+    }
+      
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+
+    this.dialog.open(SystemCruComponent, dialogConfig);
   }
 
 }
