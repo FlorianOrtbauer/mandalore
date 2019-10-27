@@ -30,6 +30,7 @@ import { FilterComponent } from './components/site-model/filter/filter.component
 import { SystemsComponent } from './components/site-model/systems/systems.component';
 import { SystemCruComponent } from './components/site-model/dialogs/system-cru/system-cru.component';
 import { SiteSelectorComponent } from './components/sidenav/site-selector/site-selector.component';
+import { MatCheckboxModule, MatSortModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,9 @@ import { SiteSelectorComponent } from './components/sidenav/site-selector/site-s
     MatGridListModule,
     MatTableModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
