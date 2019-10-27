@@ -19,6 +19,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input'; 
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
 
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NavElementComponent } from './components/sidenav/nav-element/nav-element.component';
@@ -61,7 +62,8 @@ import { SiteSelectorComponent } from './components/sidenav/site-selector/site-s
     MatGridListModule,
     MatTableModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
