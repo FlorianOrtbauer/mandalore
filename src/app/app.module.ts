@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,10 @@ import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar'; 
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatGridListModule} from '@angular/material/grid-list'; 
+import {MatTableModule} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input'; 
+import {MatDialogModule} from '@angular/material/dialog'; 
 
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NavElementComponent } from './components/sidenav/nav-element/nav-element.component';
@@ -22,7 +27,7 @@ import { SiteModelComponent } from './components/site-model/site-model.component
 import { ComponentsComponent } from './components/site-model/components/components.component';
 import { MissionsComponent } from './components/site-model/missions/missions.component';
 import { FilterComponent } from './components/site-model/filter/filter.component';
-
+import { SystemsComponent } from './components/site-model/systems/systems.component';
 
 
 @NgModule({
@@ -34,7 +39,8 @@ import { FilterComponent } from './components/site-model/filter/filter.component
     SiteModelComponent,
     ComponentsComponent,
     MissionsComponent,
-    FilterComponent
+    FilterComponent,
+    SystemsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +53,12 @@ import { FilterComponent } from './components/site-model/filter/filter.component
     MatListModule,
     MatToolbarModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    HttpClientModule,
+    MatGridListModule,
+    MatTableModule,
+    MatInputModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

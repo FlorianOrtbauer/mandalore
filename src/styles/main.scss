@@ -23,7 +23,7 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$mandalore-primary: mat-palette($mat-indigo);
+$mandalore-primary: mat-palette($mat-cyan);
 $mandalore-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -41,3 +41,36 @@ $mandalore-theme: mat-light-theme($mandalore-primary, $mandalore-accent, $mandal
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Define general settings for table views
+// table views contain a header and a content section
+// @Header: use mat-toolbar
+.table-view-header{
+    margin: $content-component-margin;
+}
+
+.table-view-content{
+    display: flex;
+    justify-content: space-between;
+}
+
+// Define general settings for tables 
+.table-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-component{
+    margin: $content-component-margin;
+    padding: $content-component-padding;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-cell, .mat-header-cell{
+    text-align: left;
+    min-width: $min-column-width;
+}

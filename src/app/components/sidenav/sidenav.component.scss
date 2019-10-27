@@ -8,6 +8,7 @@
 
 .content{
     display:flex;
+    align-items: flex-start;
 }
 
 .content button{
@@ -15,8 +16,8 @@
 }
 
 .content-container{
-    margin: $content-margin;
-    min-width: $content-min-width;
+    min-width: $content-container-min-width;
+    width: 100%;
 }
 
 mat-sidenav-container{

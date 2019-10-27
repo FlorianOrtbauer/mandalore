@@ -10,9 +10,14 @@ $nav-background:
 
 $nav-text-color: black;
 $nav-icon-pos: 5px;
+$nav-button-margin: 1em;
 
-$nav-button-margin: 50px 10px;
+//  Main content
+//  Use px values as different emphasis of elements
+$content-container-margin: 50px 10px;
+$content-container-min-width: 950px;
+$content-component-margin: 20px 20px;
+$content-component-padding: 20px;
 
-
-$content-margin: 50px 10px;
-$content-min-width: 1280px;
+//mat tables
+$min-column-width: 150px;

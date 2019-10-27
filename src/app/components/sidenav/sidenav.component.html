@@ -24,13 +24,18 @@
     <!--Outside Sidenav-->
     <mat-sidenav-content>
         <div class="content">
-            <button mat-fab (click)="sidenav.toggle()" color="primary">
-                <i class="material-icons">menu_open</i>
+            <button mat-mini-fab (click)="sidenav.toggle()" color="primary">
+                    <i class="material-icons">menu_open</i>
             </button>
+            
             <!--router outlet-->
             <div class="content-container">
                 <router-outlet></router-outlet>
             </div>
+
+
+
+            
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

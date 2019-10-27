@@ -1,0 +1,16 @@
+@import 'abstracts/variables';
+
+.filter-container{
+    display: flex;
+    align-items: center;
+}
+
+.filter-container i{
+    margin-right: 1em;
+    font-size: 1.5em;
+}
+
+mat-form-field{
+    position:relative;
+    top: 10px;
+}
