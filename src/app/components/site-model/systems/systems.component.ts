@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild} from '@angular/core';
+import {MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api-service.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
@@ -24,6 +25,7 @@ export class SystemsComponent implements OnInit {
   selectedSystems: ISystem[] = [];
   isSelected: boolean = true; 
 
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() selectedArea: IArea; 
   @Output() systemsChanged = new EventEmitter<ISystem[]>();
 
@@ -43,6 +45,7 @@ export class SystemsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataSource.sort = this.sort;
   }
 
   ngOnChanges() {
