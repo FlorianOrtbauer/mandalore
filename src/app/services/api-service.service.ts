@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ISystem } from 'src/classes/interfaces/ISystem';
 import { IComponent } from 'src/classes/interfaces/IComponent';
 import { IArea } from 'src/classes/interfaces/IArea';
+import { ISite } from 'src/classes/interfaces/ISite';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class ApiService {
 
   getAllAreas(): Observable<IArea[]>{
     return this.http.get<IArea[]>(this.baseurl+"/millenniumfalcon/areas", {headers: this.httpHeaders});
+  }
+
+  getAreasBySite(siteId): Observable<IArea[]>{
+    return this.http.get<IArea[]>(this.baseurl+"/millenniumfalcon/areas?site_id=" + siteId, {headers: this.httpHeaders});
   }
 
   getAllSystems(): Observable<ISystem[]>{

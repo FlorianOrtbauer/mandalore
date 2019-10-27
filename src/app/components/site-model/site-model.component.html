@@ -2,13 +2,13 @@
 <div class="table-view-header">
     <mat-toolbar class="mat-elevation-z2">
         <span>Site Model</span>
-        <app-filter></app-filter>
+        <app-filter (areaChanged)="changeArea($event)"></app-filter>
     </mat-toolbar>
 </div>
 
 <div class="table-view-content">
-    <app-systems></app-systems>
-    <app-components></app-components>
+    <app-systems [selectedArea]="selectedArea" (systemsChanged)="changeSystems($event)"></app-systems>
+    <app-components [selectedSystems]="selectedSystems"></app-components>
     <app-missions></app-missions>
 </div>
 

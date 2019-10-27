@@ -1,7 +1,7 @@
 <mat-form-field>
   <mat-label>Site...</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let site of sites" [value]="site.name">
+  <mat-select [(value)]="selected" [(ngModel)]="selectedSiteId" (ngModelChange)="changeSite()">
+    <mat-option *ngFor="let site of sites" [value]="site.id">
         {{site.name}}
     </mat-option>
   </mat-select>

@@ -20,20 +20,20 @@ export interface SystemComponent {
 export class SystemsComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'priority'];
-  dataSource: MatTableDataSource <ISystem> ;
+  dataSource: MatTableDataSource < ISystem > ;
   selectedSystems: ISystem[] = [];
   isSelected: boolean = true; 
+
   @Input() selectedArea: IArea; 
   @Output() systemsChanged = new EventEmitter<ISystem[]>();
 
-  constructor(private api:ApiService, private dialog: MatDialog) {}
+  constructor(private api:ApiService, private dialog:MatDialog) {}
 
   getSystems() {
-    this.api.getSystemsByArea(this.selectedArea.id).subscribe (
-      data => {
-        data.forEach(element => {
-          element.area = this.selectedArea; 
-          });
+    console.log("Get Systems for "+this.selectedArea)
+    this.api.getSystemsByArea(this.selectedArea.id)
+      .subscribe(data => {
+        data.forEach(element => {element.area = this.selectedArea;});
         this.dataSource = new MatTableDataSource(data);  
       },
       error => {
@@ -46,6 +46,7 @@ export class SystemsComponent implements OnInit {
   }
 
   ngOnChanges() {
+    console.log("OnChange triggered")
     this.selectedSystems = [];
     this.getSystems(); 
   }
