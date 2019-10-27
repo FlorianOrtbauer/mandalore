@@ -50,10 +50,6 @@ export class FilterComponent implements OnInit {
     console.log("Emitted selected Area: " + this.selectedArea.name);
   }
 
-  ngOnChanges(){
-    console.log("OnChange triggered from filter component");
-  }
-
   ngOnInit() {
   }
 }

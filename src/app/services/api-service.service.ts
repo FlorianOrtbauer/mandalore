@@ -5,6 +5,7 @@ import { ISystem } from 'src/classes/interfaces/ISystem';
 import { IComponent } from 'src/classes/interfaces/IComponent';
 import { IArea } from 'src/classes/interfaces/IArea';
 import { ISite } from 'src/classes/interfaces/ISite';
+import { IMission } from 'src/classes/interfaces/IMission';
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +44,17 @@ export class ApiService {
   getAllComponents(): Observable<IComponent[]>{
     return this.http.get<IComponent[]>(this.baseurl+"/millenniumfalcon/components", {headers: this.httpHeaders});
   }
-  getComponentBySystem(systemsId): Observable<IComponent[]>{
+  getComponentsBySystems(systemsId): Observable<IComponent[]>{
     return this.http.get<IComponent[]>(this.baseurl+"/millenniumfalcon/components?system_id=" + systemsId, {headers: this.httpHeaders});
   }
+
+  getAllMissions(): Observable<IMission[]>{
+    return this.http.get<IMission[]>(this.baseurl+"/millenniumfalcon/missions", {headers: this.httpHeaders});
+  }
+
+  getMissionsByComponents(): Observable<IMission[]>{
+    return this.http.get<IMission[]>(this.baseurl+"/millenniumfalcon/missions", {headers: this.httpHeaders});
+  }
+
 }
 

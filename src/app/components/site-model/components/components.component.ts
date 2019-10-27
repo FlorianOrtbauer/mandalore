@@ -32,7 +32,7 @@ export class ComponentsComponent implements OnInit {
     {
       
       let currentSystem = this.selectedSystems[i];
-      this.api.getComponentBySystem(currentSystem.id).subscribe (
+      this.api.getComponentsBySystems(currentSystem.id).subscribe (
         (data) => { 
           for(var j = 0; j < data.length; j++)
           {
