@@ -96,12 +96,6 @@ export class MissionsComponent implements OnInit {
 
   
   openDialog() {
-
-    if(this.selectedArea == null)
-    {
-      alert("No area selected!"); 
-      return; 
-    }
       
     const dialogConfig = new MatDialogConfig();
 
