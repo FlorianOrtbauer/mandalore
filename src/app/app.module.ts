@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {FormsModule} from '@angular/forms';
 
+// Material imports
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button'; 
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -20,7 +21,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input'; 
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import {MatSortModule} from '@angular/material/';  
 
+// component imports
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NavElementComponent } from './components/sidenav/nav-element/nav-element.component';
 import { NavHeadComponent } from './components/sidenav/nav-head/nav-head.component';
@@ -64,6 +67,7 @@ import { SiteSelectorComponent } from './components/sidenav/site-selector/site-s
     MatInputModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
