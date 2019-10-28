@@ -1,10 +1,12 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api-service.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { SystemCruComponent } from '../dialogs/system-cru/system-cru.component';
 import { ISystem } from 'src/classes/interfaces/ISystem';
 import { IComponent } from 'src/classes/interfaces/IComponent';
+import { SelectionModel } from '@angular/cdk/collections';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-components',
@@ -13,14 +15,17 @@ import { IComponent } from 'src/classes/interfaces/IComponent';
 })
 export class ComponentsComponent implements OnInit {
 
-  displayedColumns: string[] = ['system', 'name', 'priority'];
-  dataSource: MatTableDataSource < IComponent > ;
-  selectedComponents: IComponent[] = []; 
+  displayedColumns: string[] = ['select', 'system', 'name', 'priority'];
+  dataSource: MatTableDataSource < IComponent > = null;
+  selection = new SelectionModel<IComponent>(true, [], );
+  
   @Input() selectedSystems: ISystem[];
 
   constructor(private api:ApiService, private dialog: MatDialog) { 
-
+    // this.selection.changed.subscribe((change) => this.changeSelectedComponents()) ;
   }
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   getComponents() {
     if(this.selectedSystems == null)
@@ -41,6 +46,7 @@ export class ComponentsComponent implements OnInit {
             collectedData.push(elem); 
           }
           this.dataSource = new MatTableDataSource(collectedData); 
+          this.dataSource.sort = this.sort;
         },
         error => {
           console.log(error);
@@ -50,11 +56,13 @@ export class ComponentsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataSource.sort = this.sort;
   }
 
+
   ngOnChanges() {
-    this.selectedComponents = [];
-    this.dataSource = null; 
+    console.log("changes in components"); 
+    this.selection.clear(); 
     this.getComponents(); 
   }
 
@@ -62,16 +70,29 @@ export class ComponentsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  selectRow(row){
-    console.log(row); 
-    var index = this.selectedComponents.indexOf(row); 
-    if(index !== -1)
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  masterToggle() {
+    if(this.isAllSelected())
     {
-      this.selectedComponents.splice(index, 1); 
+      this.selection.clear(); 
+    } 
+    else
+    {
+      this.dataSource.data.forEach(row => this.selection.select(row));
     }
-    else{
-      this.selectedComponents.push(row); 
+        
+  }
+
+  checkboxLabel(row?: IComponent): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
   }
 
   openDialog() {
