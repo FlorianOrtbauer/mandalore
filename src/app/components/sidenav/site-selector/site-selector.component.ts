@@ -6,9 +6,7 @@ import { SiteSelectionService } from 'src/app/services/site-selection.service';
 @Component({
   selector: 'app-site-selector',
   templateUrl: './site-selector.component.html',
-  styleUrls: ['./site-selector.component.scss'],
-
-  providers: [SiteSelectionService],
+  styleUrls: ['./site-selector.component.scss']
 })
 export class SiteSelectorComponent implements OnInit {
   sites: ISite[];

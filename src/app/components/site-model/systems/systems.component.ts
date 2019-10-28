@@ -16,7 +16,7 @@ import {MatSort} from '@angular/material/sort';
 export class SystemsComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'name', 'priority'];
-  dataSource: MatTableDataSource < ISystem > = null;
+  dataSource: MatTableDataSource < ISystem > = new MatTableDataSource([]);
   selection = new SelectionModel<ISystem>(true, [], );
 
   @Input() selectedArea: IArea; 
@@ -50,6 +50,8 @@ export class SystemsComponent implements OnInit {
   }
 
   ngOnChanges() {
+    if(this.selectedArea == null)
+      return; 
     this.selection.clear();
     this.getSystems(); 
   }

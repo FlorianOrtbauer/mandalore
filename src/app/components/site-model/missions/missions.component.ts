@@ -17,7 +17,7 @@ export class MissionsComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'system', 'component', 'name', 'priority',
     'short_desc', 'instruction', 'mission_type'];
-  dataSource: MatTableDataSource < IMission > = null;
+  dataSource: MatTableDataSource < IMission > = new MatTableDataSource([]);
   selection = new SelectionModel<IMission>(true, [], );
 
   @Input() selectedComponents: IComponent[]; 

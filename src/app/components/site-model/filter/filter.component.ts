@@ -20,21 +20,11 @@ export class FilterComponent implements OnInit {
   subscription: Subscription;
 
   constructor(private siteSelection:SiteSelectionService, private api:ApiService, ) {
-    console.log("Consume site from site selection service")
-    /*this.siteSelection.siteSelected$.subscribe (
-      selectedSiteId => {
-        this.selectedSiteId = selectedSiteId;
-        console.log("consumed site from service " + this.selectedSiteId);
-      });*/
-
-    this.getSites();
+    
   }
 
   getSites = () => {
-    console.log("getAreasBy " + this.selectedSiteId);
-
-    //this.api.getAreasBySite(this.selectedSiteId).subscribe (
-      this.api.getAllAreas().subscribe (
+    this.api.getAreasBySite(this.selectedSiteId).subscribe (
       data => {
         this.areas = data;
       },
@@ -47,9 +37,14 @@ export class FilterComponent implements OnInit {
   changeArea(){
     this.selectedArea = this.areas.find(element => element.id === this.selectedAreaId);
     this.areaChanged.emit(this.selectedArea); 
-    console.log("Emitted selected Area: " + this.selectedArea.name);
   }
 
   ngOnInit() {
+    this.siteSelection.site.subscribe ( 
+      selectedSiteId => {
+        this.selectedSiteId = selectedSiteId;
+        this.getSites();
+      }, error => console.log("Error:" + error));
+    
   }
 }
