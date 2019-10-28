@@ -52,8 +52,8 @@ export class ApiService {
     return this.http.get<IMission[]>(this.baseurl+"/millenniumfalcon/missions", {headers: this.httpHeaders});
   }
 
-  getMissionsByComponents(): Observable<IMission[]>{
-    return this.http.get<IMission[]>(this.baseurl+"/millenniumfalcon/missions", {headers: this.httpHeaders});
+  getMissionsByComponents(componentId): Observable<IMission[]>{
+    return this.http.get<IMission[]>(this.baseurl+"/millenniumfalcon/missions?component_id=" + componentId, {headers: this.httpHeaders});
   }
 
 }

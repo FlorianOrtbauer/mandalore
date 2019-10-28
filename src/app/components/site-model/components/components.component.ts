@@ -20,12 +20,17 @@ export class ComponentsComponent implements OnInit {
   selection = new SelectionModel<IComponent>(true, [], );
   
   @Input() selectedSystems: ISystem[];
+  @Output() componentsChanged = new EventEmitter<IComponent[]>();
 
   constructor(private api:ApiService, private dialog: MatDialog) { 
-    // this.selection.changed.subscribe((change) => this.changeSelectedComponents()) ;
+    this.selection.changed.subscribe((change) => this.changeSelectedComponents()) ;
   }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  changeSelectedComponents() {
+    this.componentsChanged.emit(this.selection.selected);
+  }
 
   getComponents() {
     if(this.selectedSystems == null)
