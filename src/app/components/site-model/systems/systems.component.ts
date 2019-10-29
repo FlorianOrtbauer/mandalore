@@ -29,17 +29,18 @@ export class SystemsComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   getSystems() {
-    console.log("Get Systems for "+this.selectedArea)
-    this.api.getSystemsByArea(this.selectedArea.id)
-      .subscribe(data => {
-        data.forEach(element => {element.area = this.selectedArea;});
-        this.dataSource = new MatTableDataSource(data);  
-        this.dataSource.sort = this.sort;
-      },
-      error => {
-        console.log(error);
-      }
-    )
+      console.log("Get Systems for "+this.selectedArea)
+      this.api.getSystemsByArea(this.selectedArea.id)
+        .subscribe(data => {
+          data.forEach(element => {element.area = this.selectedArea;});
+          this.dataSource = new MatTableDataSource(data);  
+          this.dataSource.sort = this.sort;
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    
   }
 
   changeSelectedSystems() {
@@ -50,8 +51,8 @@ export class SystemsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  ngOnChanges() {
-    console.log("OnChange triggered")
+  ngOnChanges(changes: IArea) {
+    console.log("systems.component: ngOnChange")
     this.selection.clear();
     this.getSystems(); 
   }
