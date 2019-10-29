@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,14 +7,15 @@ import { Subject } from 'rxjs';
 export class SiteSelectionService {
 
   // Observable string source
-  private siteSelectionSource = new Subject<string>();
+  private selectedSite: BehaviorSubject<string> = new BehaviorSubject<string>("undefined");
+  site = this.selectedSite.asObservable(); 
 
-  // Observable string stream
-  siteSelected$ = this.siteSelectionSource.asObservable();
+  constructor(){
+  }
+
 
   selectSite(selectedSiteId: string){
-    this.siteSelectionSource.next(selectedSiteId);
-    console.log("sucessfully received site "+ selectedSiteId + " in site selection service");
+    this.selectedSite.next(selectedSiteId);
   }
 
 }

@@ -148,8 +148,8 @@ export class ApiService {
     return http$;
   }
 
-  getMissionsByComponents(): Observable<IMission[]>{
-    const http$ = this.http.get<IMission[]>(this.baseurl+"/millenniumfalcon/missions", {headers: this.httpHeaders});
+  getMissionsByComponents(component_id): Observable<IMission[]>{
+    const http$ = this.http.get<IMission[]>(this.baseurl+"/millenniumfalcon/missions?component_id=" + component_id, {headers: this.httpHeaders});
     http$
     .pipe(
         catchError(err => of([]))
