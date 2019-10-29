@@ -16,7 +16,7 @@ import { IMission } from 'src/classes/interfaces/IMission';
 export class MissionsComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'system', 'component', 'name', 'priority',
-    'short_desc', 'instruction', 'mission_type'];
+    'short_desc', 'mission_type']; //'instruction'
   dataSource: MatTableDataSource < IMission > = new MatTableDataSource([]);
   selection = new SelectionModel<IMission>(true, [], );
 

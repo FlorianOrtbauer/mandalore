@@ -22,6 +22,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import {MatSortModule} from '@angular/material/';  
+import {MatTabsModule} from '@angular/material/tabs'; 
 
 // component imports
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -68,6 +69,7 @@ import { SiteSelectorComponent } from './components/sidenav/site-selector/site-s
     MatDialogModule,
     MatCheckboxModule,
     MatSortModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
