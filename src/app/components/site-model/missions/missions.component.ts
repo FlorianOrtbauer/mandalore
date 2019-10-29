@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import { ApiService } from 'src/app/services/api-service.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { SystemCruComponent } from '../dialogs/system-cru/system-cru.component';
@@ -11,12 +12,20 @@ import { IMission } from 'src/classes/interfaces/IMission';
 @Component({
   selector: 'app-missions',
   templateUrl: './missions.component.html',
-  styleUrls: ['./missions.component.scss']
+  styleUrls: ['./missions.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ])
+  ],
 })
 export class MissionsComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'system', 'component', 'name', 'priority',
-    'short_desc', 'mission_type']; //'instruction'
+    'short_desc', 'mission_type']; //'instruction
+  expandedElement = ['instruction'];
   dataSource: MatTableDataSource < IMission > = new MatTableDataSource([]);
   selection = new SelectionModel<IMission>(true, [], );
 
