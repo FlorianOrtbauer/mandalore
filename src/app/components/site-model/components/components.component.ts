@@ -33,9 +33,7 @@ export class ComponentsComponent implements OnInit {
   }
 
   getComponents() {
-    if(this.selectedSystems == null)
-      return; 
-
+    
     var collectedData: IComponent[] = []; 
 
     for(var i = 0; i < this.selectedSystems.length; i++)
@@ -72,8 +70,8 @@ export class ComponentsComponent implements OnInit {
   }
 
   ngOnChanges() {
-    if(this.selectedSystems == null)
-      return; 
+    if(this.selectedSystems == null || this.selectedSystems.length == 0)
+      this.dataSource = new MatTableDataSource([]); 
     this.selection.clear(); 
     this.getComponents(); 
   }

@@ -70,6 +70,9 @@ export class MissionsComponent implements OnInit {
   }
 
   ngOnChanges() {
+    if(this.selectedComponents == null || this.selectedComponents.length == 0)
+      this.dataSource = new MatTableDataSource([]); 
+
     this.selection.clear();
     this.getMissions(); 
   }
