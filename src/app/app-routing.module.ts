@@ -8,7 +8,7 @@ import { SiteModelComponent } from './components/site-model/site-model.component
 
 const routes: Routes = [
   
-  { path: 'site-model', component: SiteModelComponent },
+  { path: 'site-model', component: SiteModelComponent, outlet:"content" },
 
 ];
 

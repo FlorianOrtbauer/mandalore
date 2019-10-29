@@ -10,9 +10,9 @@
 
             <div class="sidenav-nav">
                 <mat-list role="list">
-                    <app-nav-element icon="reorder" name="Site Model" link="/site-model"></app-nav-element>
-                    <app-nav-element icon="navigation" name="Mission Control" link="/site-model"></app-nav-element>
-                    <app-nav-element icon="dashboard" name="Planner" link="/site-model"></app-nav-element>
+                    <app-nav-element icon="reorder" name="Site Model" [routerLink]='[{ outlets: { content: ["site-model"] } }]'></app-nav-element>
+                    <app-nav-element icon="navigation" name="Mission Control" [routerLink]='[{ outlets: { content: ["site-model"] } }]'></app-nav-element>
+                    <app-nav-element icon="dashboard" name="Planner" [routerLink]='[{ outlets: { content: ["site-model"] } }]'></app-nav-element>
                 </mat-list>
             </div>
 
@@ -31,8 +31,7 @@
             <!--router outlet-->
             <div class="content-container">
                 <!--TODO: create Router Outlet for Sidenav-->
-                <!--router-outlet name="content"></router-outlet-->
-                <router-outlet></router-outlet>
+                <router-outlet name="content"></router-outlet>
             </div>
         </div>
     </mat-sidenav-content>
