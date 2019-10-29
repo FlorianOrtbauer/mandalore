@@ -24,7 +24,7 @@ import { IMission } from 'src/classes/interfaces/IMission';
 export class MissionsComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'system', 'component', 'name', 'priority',
-    'short_desc', 'mission_type']; //'instruction
+    'short_desc', 'mission_type', 'edit']; //'instruction
   expandedElement = 'instruction'; 
   dataSource: MatTableDataSource < IMission > = new MatTableDataSource([]);
   selection = new SelectionModel<IMission>(true, [], );
@@ -72,6 +72,13 @@ export class MissionsComponent implements OnInit {
   ngOnChanges() {
     this.selection.clear();
     this.getMissions(); 
+  }
+
+  toggleSelection($event, row)
+  {
+    if($event.target.tagName === "I")
+      return; 
+    this.selection.toggle(row); 
   }
 
   applyFilter(filterValue: string) {

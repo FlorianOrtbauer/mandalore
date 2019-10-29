@@ -15,7 +15,7 @@ import {MatSort} from '@angular/material/sort';
 })
 export class ComponentsComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'system', 'name', 'priority'];
+  displayedColumns: string[] = ['select', 'system', 'name', 'priority', 'edit'];
   dataSource: MatTableDataSource < IComponent > = new MatTableDataSource([]);
   selection = new SelectionModel<IComponent>(true, [], );
   
@@ -64,6 +64,12 @@ export class ComponentsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  toggleSelection($event, row)
+  {
+    if($event.target.tagName === "I")
+      return; 
+    this.selection.toggle(row); 
+  }
 
   ngOnChanges() {
     if(this.selectedSystems == null)
