@@ -41,6 +41,7 @@ import { ClientConfigurationComponent } from './components/client-configuration/
 import { ClientComponent } from './components/client-configuration/client/client.component';
 import { SitesComponent } from './components/client-configuration/sites/sites.component';
 import { WorldMapComponent } from './components/client-configuration/world-map/world-map.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { WorldMapComponent } from './components/client-configuration/world-map/w
     ClientComponent,
     SitesComponent,
     WorldMapComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
