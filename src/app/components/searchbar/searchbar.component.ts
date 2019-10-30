@@ -26,9 +26,10 @@ export class SearchbarComponent implements OnInit {
     this.conn.getConfig()
       .subscribe(data => {
         console.log("what is dis?")
-        if (true) {
-          this.dot = 'green';
-        }
+
+        let temp = document.getElementsByClassName("status-circle") as HTMLCollectionOf<HTMLElement>
+        console.log(temp);
+        temp[0].style.backgroundColor ="green";
 
       });
   }
