@@ -21,7 +21,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input'; 
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
-import {MatSortModule} from '@angular/material/';  
+import {MatSortModule, MatIconModule, MatMenuModule} from '@angular/material/';  
 import {MatTabsModule} from '@angular/material/tabs'; 
 
 // component imports
@@ -35,6 +35,7 @@ import { FilterComponent } from './components/site-model/filter/filter.component
 import { SystemsComponent } from './components/site-model/systems/systems.component';
 import { SystemCruComponent } from './components/site-model/dialogs/system-cru/system-cru.component';
 import { SiteSelectorComponent } from './components/sidenav/site-selector/site-selector.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { SiteSelectorComponent } from './components/sidenav/site-selector/site-s
     SystemsComponent,
     SystemCruComponent,
     SiteSelectorComponent,
+    SearchbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +72,8 @@ import { SiteSelectorComponent } from './components/sidenav/site-selector/site-s
     MatCheckboxModule,
     MatSortModule,
     MatTabsModule,
+    MatIconModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
