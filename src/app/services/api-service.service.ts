@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, BehaviorSubject, interval } from 'rxjs';
+import { catchError, first, retry } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ISystem } from 'src/classes/interfaces/ISystem';
 import { IComponent } from 'src/classes/interfaces/IComponent';
@@ -14,10 +14,30 @@ import { IMission } from 'src/classes/interfaces/IMission';
 })
 export class ApiService {
 
+ 
+
   baseurl = "http://127.0.0.1:8000";
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(private http: HttpClient) { }
+
+
+  constructor(private http: HttpClient) { }  
+
+  getConfig() {
+    const http$ = this.http.get(this.baseurl+"/millenniumfalcon/sites", {headers: this.httpHeaders});
+    http$
+    .pipe(
+        catchError(err => of([]))
+      )
+      .subscribe(
+        res => console.log('api-service [success]: getConnection HTTP response', res),
+        err => console.log('api-service [error]: getConnection HTTP Error', err),
+        () => console.log('api-service [completed]: getConnection HTTP request completed.')
+    );
+    return http$;
+  }
+
+   //------------------------- end connection ping ---------- 
 
   getAllClients(): Observable<any>{
     const http$ = this.http.get(this.baseurl+"/millenniumfalcon/clients", {headers: this.httpHeaders});
