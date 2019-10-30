@@ -76,6 +76,19 @@ export class ComponentsComponent implements OnInit {
     this.getComponents(); 
   }
 
+  delete()
+  {
+    if(this.selection.selected.length === 0)
+    {
+      alert("No components selected!");
+      return;
+    }
+      
+    if(confirm("Are you sure to delete the selected components?")) {
+      console.log("DELETE!");
+    }
+  }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

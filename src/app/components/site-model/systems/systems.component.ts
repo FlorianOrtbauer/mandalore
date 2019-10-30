@@ -46,6 +46,19 @@ export class SystemsComponent implements OnInit {
     this.systemsChanged.emit(this.selection.selected);
   }
 
+  delete()
+  {
+    if(this.selection.selected.length === 0)
+    {
+      alert("No systems selected!");
+      return;
+    }
+      
+    if(confirm("Are you sure to delete the selected systems?")) {
+      console.log("DELETE!");
+    }
+  }
+
   ngOnInit() {
     this.dataSource.sort = this.sort;
   }

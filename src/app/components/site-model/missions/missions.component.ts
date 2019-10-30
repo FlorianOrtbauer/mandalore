@@ -77,6 +77,20 @@ export class MissionsComponent implements OnInit {
     this.getMissions(); 
   }
 
+  delete()
+  {
+    if(this.selection.selected.length === 0)
+    {
+      alert("No missions selected!");
+      return;
+    }
+      
+    if(confirm("Are you sure to delete the selected missions?")) {
+      this.api.deleteMissions(this.selection.selected);
+      this.getMissions();
+    }
+  }
+
   toggleSelection($event, row)
   {
     if($event.target.tagName === "I")

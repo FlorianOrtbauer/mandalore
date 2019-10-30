@@ -140,6 +140,14 @@ export class ApiService {
     return http$;
   }
 
+  deleteMissions(missions: IMission[])
+  {
+    missions.forEach(mission => {
+      this.http.delete(this.baseurl+"/millenniumfalcon/missions?id=" + mission.id, 
+      {headers: this.httpHeaders}).subscribe((data) => console.log(data));
+    });
+  }
+
   getComponentsBySystems(systemsId): Observable<IComponent[]>{
     const http$ = this.http.get<IComponent[]>(this.baseurl+"/millenniumfalcon/components?system_id=" + systemsId, {headers: this.httpHeaders});
     http$
