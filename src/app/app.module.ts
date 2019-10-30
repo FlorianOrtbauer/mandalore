@@ -23,7 +23,6 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import {MatSortModule, MatIconModule, MatMenuModule} from '@angular/material/';  
 import {MatTabsModule} from '@angular/material/tabs'; 
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 // component imports
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -86,7 +85,6 @@ import { LoginComponent } from './components/login/login.component';
     MatTabsModule,
     MatIconModule,
     MatMenuModule,
-    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
