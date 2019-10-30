@@ -1,8 +1,9 @@
-<mat-toolbar>
-    <mat-toolbar-row>
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+    
         <mat-form-field>
             <input matInput placeholder="Search">
         </mat-form-field>
+        <span>status online</span>
         <div class="">
             <button mat-icon-button (click)="Fullscreen=!Fullscreen" (click)="toggleFullScreen()"
                 aria-label="Fullscreen Button">
@@ -59,9 +60,9 @@
                 <mat-icon *ngIf="!showFirst">more_vert</mat-icon>
             </button>
 
-<span>status online</span>
+
         </div>
-    </mat-toolbar-row>
+
 </mat-toolbar>
 
 <!-- <app-sidebar-right [showMePartially]="showVar"></app-sidebar-right> -->

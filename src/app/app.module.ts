@@ -23,6 +23,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import {MatSortModule, MatIconModule, MatMenuModule} from '@angular/material/';  
 import {MatTabsModule} from '@angular/material/tabs'; 
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // component imports
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -36,6 +37,7 @@ import { SystemsComponent } from './components/site-model/systems/systems.compon
 import { SystemCruComponent } from './components/site-model/dialogs/system-cru/system-cru.component';
 import { SiteSelectorComponent } from './components/sidenav/site-selector/site-selector.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
+
 
 @NgModule({
   declarations: [
@@ -74,6 +76,7 @@ import { SearchbarComponent } from './components/searchbar/searchbar.component';
     MatTabsModule,
     MatIconModule,
     MatMenuModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
