@@ -1,9 +1,6 @@
 @import 'abstracts/variables';
 
-.searchbar-flex {
+.content-toolbar {
     display: flex;
     justify-content: space-between;
-    // justify-content: center;
-    margin-left: auto;
-    margin-right: $content-component-margin;
 }
