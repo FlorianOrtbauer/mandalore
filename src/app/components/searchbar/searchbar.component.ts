@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api-service.service';
 
 
@@ -20,12 +20,15 @@ export class SearchbarComponent implements OnInit {
     this.showConfig();
   }
 
- 
+  @Input() dot : string;
 
   showConfig() {
     this.conn.getConfig()
       .subscribe(data => {
         console.log("what is dis?")
+        if (true) {
+          this.dot = 'green';
+        }
 
       });
   }

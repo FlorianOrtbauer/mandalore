@@ -5,22 +5,12 @@
     justify-content: space-between;
 }
 
-.success {
-    background-color: green;
-    padding: 16px;
-    color: white;
-  }
-  
-  .error {
-    background-color: red;
-    color: white;
-    padding: 16px;
-  }
+
 
 .status-circle {
     height: 15px;
     width: 15px;
-    background-color: #bbb;
+    background-color: red;
     border-radius: 50%;
     display: inline-block;
 }
