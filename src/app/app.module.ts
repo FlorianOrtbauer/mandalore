@@ -36,6 +36,10 @@ import { SystemsComponent } from './components/site-model/systems/systems.compon
 import { SystemCruComponent } from './components/site-model/dialogs/system-cru/system-cru.component';
 import { SiteSelectorComponent } from './components/sidenav/site-selector/site-selector.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { ClientConfigurationComponent } from './components/client-configuration/client-configuration.component';
+import { ClientComponent } from './components/client-configuration/client/client.component';
+import { SitesComponent } from './components/client-configuration/sites/sites.component';
+import { WorldMapComponent } from './components/client-configuration/world-map/world-map.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,10 @@ import { SearchbarComponent } from './components/searchbar/searchbar.component';
     SystemCruComponent,
     SiteSelectorComponent,
     SearchbarComponent,
+    ClientConfigurationComponent,
+    ClientComponent,
+    SitesComponent,
+    WorldMapComponent,
   ],
   imports: [
     BrowserModule,
