@@ -1,5 +1,14 @@
 @import 'abstracts/variables';
+@import 'abstracts/mixins';
 
 .mat-form-field{
     width: 100%;
 }
+
+@include mat-table-columns((
+    select: (width: $checkbox-column-width),
+    system: (width: $name-column-width),
+    name: (width: $name-column-width),
+    priority: (width: $priority-column-width),
+    edit: (width: $edit-column-width)
+));
