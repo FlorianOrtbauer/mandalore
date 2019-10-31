@@ -8,8 +8,11 @@ import { LoginComponent } from './components/login/login.component';
 
 
 const routes: Routes = [
+  // main app routes
   { path: '', component: LoginComponent},
   { path: 'cmms', component: SidenavComponent},
+
+  // content outlets
   { path: 'site-model', component: SiteModelComponent, outlet:"content" },
 
 ];
