@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api-service.service';
+import { interval } from 'rxjs';
+
 
 
 
@@ -10,45 +12,32 @@ import { ApiService } from 'src/app/services/api-service.service';
 })
 export class SearchbarComponent implements OnInit {
   showVar : boolean = false;
-
+  alive = true;
 
   toggleChild(){
     this.showVar = !this.showVar;
 }
 
   constructor(private conn: ApiService) { 
+    // secondsCounter.subscribe(n =>{ this.showConfig()});
     this.showConfig();
   }
-
-  @Input() dot : string;
-
+  
   showConfig() {
     this.conn.getConfig()
       .subscribe(data => {
-        console.log("what is dis?")
+
 
         let temp = document.getElementsByClassName("status-circle") as HTMLCollectionOf<HTMLElement>
-        console.log(temp);
+        // console.log("temp");
         temp[0].style.backgroundColor ="green";
-
+     return;
+     
       });
+
   }
-    
-    
-    
-    
-    
-    
-    // = () => {
-    //   this.conn.getconnection().subscribe (data => {
-    //       this.sites = data;
-    //       console.log("connection success"); 
-    //     },
-    //     error => {
-    //       console.log("what is dis");
-    //     }
-    //   )
-    // }
+  
+  
   
 
   ngOnInit() {
@@ -56,7 +45,5 @@ export class SearchbarComponent implements OnInit {
 
 }
 
-export interface Config {
-  heroesUrl: string;
-  textfile: string;
-}
+
+const secondsCounter = interval(10000);
