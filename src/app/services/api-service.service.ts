@@ -143,7 +143,7 @@ export class ApiService {
   deleteMissions(missions: IMission[])
   {
     missions.forEach(mission => {
-      this.http.delete(this.baseurl+"/millenniumfalcon/missions?id=" + mission.id, 
+      this.http.delete(this.baseurl+"/millenniumfalcon/missions/" + mission.id, 
       {headers: this.httpHeaders}).subscribe((data) => console.log(data));
     });
   }
