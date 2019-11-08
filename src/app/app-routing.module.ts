@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'cmms', component: SidenavComponent},
   { path: 'site-model', component: SiteModelComponent, outlet:"content" }
+  
 ];
 
 @NgModule({
