@@ -1,17 +1,25 @@
-<h1 mat-dialog-title>Add new system</h1>
-<!--div mat-dialog-content>
-    <mat-form-field>
-        <input matInput placeholder="Systemname" formControlName="name">
-    </mat-form-field>
+<div class="content">
+
+    <h1 mat-dialog-title>{{title}}</h1>
+
+        <div mat-dialog-content>
+            <mat-form-field>
+                <input matInput placeholder="Systemname" [(ngModel)]="system.name">
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-content>
+            <mat-form-field>
+                <input matInput placeholder="Priority" [(ngModel)]="system.priority">
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions>
+            <button mat-button (click)="cancel()">Cancel</button>
+            <button mat-button (click)="save()" cdkFocusInitial>Save</button>
+        </div>
+
 </div>
 
-<div mat-dialog-content>
-    <mat-form-field>
-        <input matInput placeholder="Priority" formControlName="priority">
-    </mat-form-field>
-</div>
 
-<div mat-dialog-actions>
-    <button mat-button (click)="cancel()">Cancel</button>
-    <button mat-button (click)="save()" cdkFocusInitial>Save</button>
-</div-->
+

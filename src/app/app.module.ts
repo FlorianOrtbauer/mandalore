@@ -56,7 +56,6 @@ import { LoginComponent } from './components/login/login.component';
     MissionsComponent,
     FilterComponent,
     SystemsComponent,
-    SystemCruComponent,
     SiteSelectorComponent,
     SearchbarComponent,
     ClientConfigurationComponent,
@@ -64,6 +63,7 @@ import { LoginComponent } from './components/login/login.component';
     SitesComponent,
     WorldMapComponent,
     LoginComponent,
+    SystemCruComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +91,9 @@ import { LoginComponent } from './components/login/login.component';
     MatCardModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    SystemCruComponent
+  ]
 })
 export class AppModule { }

@@ -107,7 +107,7 @@ export class SystemsComponent implements OnInit {
   }
 
   
-  openDialog() {
+  openAddDialog() {
 
     if(this.selectedArea == null)
     {
@@ -119,6 +119,23 @@ export class SystemsComponent implements OnInit {
 
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
+
+    this.dialog.open(SystemCruComponent, dialogConfig);
+  }
+
+  edit(system)
+  {
+    if(this.selectedArea == null)
+    {
+      alert("No area selected!"); 
+      return; 
+    }
+      
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = system;
 
     this.dialog.open(SystemCruComponent, dialogConfig);
   }
