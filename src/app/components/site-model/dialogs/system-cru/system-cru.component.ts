@@ -45,7 +45,8 @@ export class SystemCruComponent implements OnInit {
   save() {
     if(this.isEdit)
       this.api.editSystem(this.system); 
-      
+    else
+      this.api.addSystem(this.system); 
     this.dialogRef.close();
   }
 

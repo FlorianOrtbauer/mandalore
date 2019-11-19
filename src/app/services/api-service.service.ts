@@ -125,6 +125,20 @@ export class ApiService {
     
   }
 
+  addSystem(system: ISystem) : void
+  {
+    var systemData = {name: system.name, priority: system.priority}; 
+    //TODO: Only pass systemData but Django responses with BadRequest (400). 
+    //Correction in Django needed @Florian
+
+    this.http.post<ISystem>(this.baseurl+"/millenniumfalcon/systems/", system, {headers: this.httpHeaders})
+    .subscribe(
+      res => console.log('api-service [success]: editSystem HTTP response', res),
+      err => console.log('api-service [error]: editSystem HTTP Error', err),
+      () => console.log('api-service [completed]: editSystem HTTP request completed.'));
+    
+  }
+
   getSystemsByArea(areaId): Observable<ISystem[]>{
     const http$ = this.http.get<ISystem[]>(this.baseurl+"/millenniumfalcon/systems?area_id=" + areaId, {headers: this.httpHeaders});
     
