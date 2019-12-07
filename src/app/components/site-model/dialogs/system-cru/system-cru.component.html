@@ -1,24 +1,37 @@
 <div class="content">
 
-    <h1 mat-dialog-title>{{title}}</h1>
+    
 
+    <form #systemForm="ngForm">
+        <h1 mat-dialog-title>{{title}}</h1>
         <div mat-dialog-content>
             <mat-form-field>
-                <input matInput placeholder="Systemname" [(ngModel)]="system.name">
+                <input matInput placeholder="Systemname" [(ngModel)]="system.name" name="name" required minlength="3">
             </mat-form-field>
+        </div>
+        
+        <div *ngIf="systemForm?.controls?.name?.errors?.required" style="color: red">
+                Name is required.
+        </div>
+
+        <div *ngIf="systemForm?.controls?.name?.errors?.minlength" style="color: red">
+                Name must be at least 3 characters long.
         </div>
 
         <div mat-dialog-content>
             <mat-form-field>
-                <input matInput placeholder="Priority" [(ngModel)]="system.priority">
+                <input matInput placeholder="Priority" [(ngModel)]="system.priority" name="priority" required>
             </mat-form-field>
+        </div>
+        <div *ngIf="systemForm?.controls?.priority?.errors?.required" style="color: red">
+                Priority is required.
         </div>
 
         <div mat-dialog-actions>
             <button mat-button (click)="cancel()">Cancel</button>
-            <button mat-button (click)="save()" cdkFocusInitial>Save</button>
+            <button mat-button (click)="save()" cdkFocusInitial [disabled]="!systemForm?.valid">Save</button>
         </div>
-
+    </form>   
 </div>
 
 
