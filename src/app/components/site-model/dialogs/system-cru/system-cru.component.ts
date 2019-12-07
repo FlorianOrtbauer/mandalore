@@ -12,6 +12,8 @@ import { ApiService } from 'src/app/services/api-service.service';
 export class SystemCruComponent implements OnInit {
 
   system: ISystem; 
+  originalSystem: ISystem; 
+
   isEdit: boolean; 
   title: string; 
   @Input() area: IArea; 
@@ -21,6 +23,7 @@ export class SystemCruComponent implements OnInit {
     private api:ApiService) { }
 
   ngOnInit() {
+    
     if(this.importedSystem)
     {
       this.title = "Edit system";
@@ -37,9 +40,9 @@ export class SystemCruComponent implements OnInit {
   }
 
   cancel() {
+    this.system = this.originalSystem;  
     console.log(this.system); 
-
-    // this.dialogRef.close();
+    this.dialogRef.close();
   }
 
   save() {

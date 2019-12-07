@@ -117,7 +117,7 @@ export class SystemsComponent implements OnInit {
       
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
     this.dialog.open(SystemCruComponent, dialogConfig);
@@ -133,7 +133,7 @@ export class SystemsComponent implements OnInit {
       
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = system;
 
