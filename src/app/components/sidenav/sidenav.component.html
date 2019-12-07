@@ -1,6 +1,6 @@
 
 <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="mat-elevation-z8">
+    <mat-sidenav #sidenav mode="side" opened="true" disableClose="true" class="mat-elevation-z8">
         <div class="nav-container">
         
             <div class="sidenav-header">
@@ -26,9 +26,6 @@
     <mat-sidenav-content>
         <div class="content">
             <div class="content-header">
-                <button mat-mini-fab (click)="sidenav.toggle()" color="primary">
-                    <i class="material-icons">menu_open</i>
-                </button>
                 <app-searchbar style="width: 100%;"></app-searchbar>
             </div>
             
