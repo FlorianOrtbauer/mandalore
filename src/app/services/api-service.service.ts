@@ -139,6 +139,14 @@ export class ApiService {
     
   }
 
+  deleteSystems(systems: ISystem[])
+  {
+    systems.forEach(system => {
+      this.http.delete(this.baseurl+"/millenniumfalcon/systems/" + system.id, 
+      {headers: this.httpHeaders}).subscribe((data) => console.log(data));
+    });
+  }
+
   getSystemsByArea(areaId): Observable<ISystem[]>{
     const http$ = this.http.get<ISystem[]>(this.baseurl+"/millenniumfalcon/systems?area_id=" + areaId, {headers: this.httpHeaders});
     

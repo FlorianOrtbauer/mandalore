@@ -4,5 +4,6 @@ export interface ISystem {
     id: string; 
     name: string; 
     priority: string; 
-    area: IArea; 
+    area_id: string;
+    area: IArea;  
 }

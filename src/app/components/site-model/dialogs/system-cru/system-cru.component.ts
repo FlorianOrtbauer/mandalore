@@ -19,21 +19,23 @@ export class SystemCruComponent implements OnInit {
   @Input() area: IArea; 
   
   constructor(private dialogRef: MatDialogRef<SystemCruComponent>,
-    @Inject(MAT_DIALOG_DATA) public importedSystem: ISystem,
-    private api:ApiService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private api:ApiService) { 
+      console.log(data); 
+    }
 
-  ngOnInit() {
-    
-    if(this.importedSystem)
+  ngOnInit() { 
+    if(this.data.importedSystem)
     {
       this.title = "Edit system";
-      this.system = this.importedSystem; 
+      this.system = this.data.importedSystem; 
       this.isEdit = true; 
     }
     else
     {
       this.title = "Add new system"; 
       this.system = {} as ISystem; 
+      this.system.area_id = this.data.area_id; 
       this.isEdit = false; 
     }
       

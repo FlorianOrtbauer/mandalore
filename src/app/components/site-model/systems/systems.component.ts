@@ -55,7 +55,8 @@ export class SystemsComponent implements OnInit {
     }
       
     if(confirm("Are you sure to delete the selected systems?")) {
-      console.log("DELETE!");
+      this.api.deleteSystems(this.selection.selected);
+      this.getSystems();
     }
   }
 
@@ -119,8 +120,10 @@ export class SystemsComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.data =  {'area_id': this.selectedArea.id}; 
 
     this.dialog.open(SystemCruComponent, dialogConfig);
+    this.getSystems(); 
   }
 
   edit(system)
@@ -135,9 +138,10 @@ export class SystemsComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = system;
+    dialogConfig.data = {importedSystem: system};
 
     this.dialog.open(SystemCruComponent, dialogConfig);
+    this.getSystems(); 
   }
 
 }
