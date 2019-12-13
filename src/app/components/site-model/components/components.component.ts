@@ -70,9 +70,10 @@ export class ComponentsComponent implements OnInit {
   }
 
   ngOnChanges() {
+    this.selection.clear(); 
     if(this.selectedSystems == null || this.selectedSystems.length == 0)
       this.dataSource = new MatTableDataSource([]); 
-    this.selection.clear(); 
+    
     this.getComponents(); 
   }
 
