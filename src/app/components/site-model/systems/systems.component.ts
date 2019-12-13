@@ -56,7 +56,7 @@ export class SystemsComponent implements OnInit {
       
     if(confirm("Are you sure to delete the selected systems?")) {
       this.api.deleteSystems(this.selection.selected);
-      this.getSystems();
+      setTimeout(() => this.getSystems(),1000);
     }
   }
 
@@ -123,7 +123,10 @@ export class SystemsComponent implements OnInit {
     dialogConfig.data =  {'area_id': this.selectedArea.id}; 
 
     this.dialog.open(SystemCruComponent, dialogConfig);
-    this.getSystems(); 
+    this.dialog.afterAllClosed.subscribe(() => {
+      setTimeout(() => this.getSystems(),1000);
+    });
+    
   }
 
   edit(system)
@@ -141,7 +144,9 @@ export class SystemsComponent implements OnInit {
     dialogConfig.data = {importedSystem: system};
 
     this.dialog.open(SystemCruComponent, dialogConfig);
-    this.getSystems(); 
+    this.dialog.afterAllClosed.subscribe(() => {
+      setTimeout(() => this.getSystems(),1000);
+    }); 
   }
 
 }
