@@ -29,7 +29,6 @@ import {MatCardModule} from '@angular/material/card';
 // component imports
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NavElementComponent } from './components/sidenav/nav-element/nav-element.component';
-import { NavHeadComponent } from './components/sidenav/nav-head/nav-head.component';
 import { SiteModelComponent } from './components/site-model/site-model.component';
 import { ComponentsComponent } from './components/site-model/components/components.component';
 import { MissionsComponent } from './components/site-model/missions/missions.component';
@@ -37,7 +36,7 @@ import { FilterComponent } from './components/site-model/filter/filter.component
 import { SystemsComponent } from './components/site-model/systems/systems.component';
 import { SystemCruComponent } from './components/site-model/dialogs/system-cru/system-cru.component';
 import { SiteSelectorComponent } from './components/sidenav/site-selector/site-selector.component';
-import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { TitlebarComponent } from './components/titlebar/titlebar.component';
 import { ClientConfigurationComponent } from './components/client-configuration/client-configuration.component';
 import { ClientComponent } from './components/client-configuration/client/client.component';
 import { SitesComponent } from './components/client-configuration/sites/sites.component';
@@ -50,14 +49,13 @@ import { LoginComponent } from './components/login/login.component';
     AppComponent,
     SidenavComponent,
     NavElementComponent,
-    NavHeadComponent,
     SiteModelComponent,
     ComponentsComponent,
     MissionsComponent,
     FilterComponent,
     SystemsComponent,
     SiteSelectorComponent,
-    SearchbarComponent,
+    TitlebarComponent,
     ClientConfigurationComponent,
     ClientComponent,
     SitesComponent,

@@ -6,11 +6,11 @@ import { interval } from 'rxjs';
 
 
 @Component({
-  selector: 'app-searchbar',
-  templateUrl: './searchbar.component.html',
-  styleUrls: ['./searchbar.component.scss']
+  selector: 'app-titlebar',
+  templateUrl: './titlebar.component.html',
+  styleUrls: ['./titlebar.component.scss']
 })
-export class SearchbarComponent implements OnInit {
+export class TitlebarComponent implements OnInit {
   showVar : boolean = false;
   alive = true;
 
