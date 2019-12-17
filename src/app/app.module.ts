@@ -40,7 +40,6 @@ import { TitlebarComponent } from './components/titlebar/titlebar.component';
 import { ClientConfigurationComponent } from './components/client-configuration/client-configuration.component';
 import { ClientComponent } from './components/client-configuration/client/client.component';
 import { SitesComponent } from './components/client-configuration/sites/sites.component';
-import { WorldMapComponent } from './components/client-configuration/world-map/world-map.component';
 import { LoginComponent } from './components/login/login.component';
 
 
@@ -59,7 +58,6 @@ import { LoginComponent } from './components/login/login.component';
     ClientConfigurationComponent,
     ClientComponent,
     SitesComponent,
-    WorldMapComponent,
     LoginComponent,
     SystemCruComponent
   ],
