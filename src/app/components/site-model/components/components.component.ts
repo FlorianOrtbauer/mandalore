@@ -15,9 +15,9 @@ import {MatSort} from '@angular/material/sort';
 })
 export class ComponentsComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'system', 'name', 'priority', 'edit'];
+  displayedColumns: string[] = ['select', 'name', 'priority', 'edit'];
   dataSource: MatTableDataSource < IComponent > = new MatTableDataSource([]);
-  selection = new SelectionModel<IComponent>(true, [], );
+  selection = new SelectionModel<IComponent>(false, [], );
   
   @Input() selectedSystems: ISystem[];
   @Output() componentsChanged = new EventEmitter<IComponent[]>();

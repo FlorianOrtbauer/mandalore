@@ -17,7 +17,7 @@ export class SystemsComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'name', 'priority', 'edit'];
   dataSource: MatTableDataSource < ISystem > = new MatTableDataSource([]);
-  selection = new SelectionModel<ISystem>(true, [], );
+  selection = new SelectionModel<ISystem>(false, [], );
 
   @Input() selectedArea: IArea; 
   @Output() systemsChanged = new EventEmitter<ISystem[]>();

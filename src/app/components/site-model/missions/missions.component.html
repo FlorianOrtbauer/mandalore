@@ -21,11 +21,6 @@
     <!-- Checkbox Column -->
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (change)="$event ? masterToggle() : null"
-                      [checked]="selection.hasValue() && isAllSelected()"
-                      [indeterminate]="selection.hasValue() && !isAllSelected()"
-                      [aria-label]="checkboxLabel()">
-        </mat-checkbox>
       </th>
       <td mat-cell *matCellDef="let row">
         <mat-checkbox (click)="$event.stopPropagation()"
@@ -34,18 +29,6 @@
                       [aria-label]="checkboxLabel(row)">
         </mat-checkbox>
       </td>
-    </ng-container>
-
-    <!-- system Column -->
-    <ng-container matColumnDef="system">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> System </th>
-      <td mat-cell *matCellDef="let element"> {{element.component.system.name}} </td>
-    </ng-container>
-
-    <!-- component Column -->
-    <ng-container matColumnDef="component">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Component </th>
-      <td mat-cell *matCellDef="let element"> {{element.component.name}} </td>
     </ng-container>
 
     <!-- Name Column -->
