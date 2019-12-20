@@ -10,21 +10,21 @@ import {FormsModule} from '@angular/forms';
 
 // Material imports
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatButtonModule} from '@angular/material/button'; 
+import {MatButtonModule} from '@angular/material/button';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatListModule} from '@angular/material/list';
-import {MatToolbarModule} from '@angular/material/toolbar'; 
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field'; 
-import {MatGridListModule} from '@angular/material/grid-list'; 
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
-import {MatInputModule} from '@angular/material/input'; 
+import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
-import {MatCheckboxModule} from '@angular/material/checkbox'; 
-import {MatSortModule, MatIconModule, MatMenuModule} from '@angular/material/';  
-import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSortModule, MatIconModule, MatMenuModule} from '@angular/material/';
+import {MatTabsModule} from '@angular/material/tabs';
 import {MatBadgeModule} from '@angular/material/badge';
-import {MatCardModule} from '@angular/material/card'; 
+import {MatCardModule} from '@angular/material/card';
 
 // component imports
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -41,26 +41,28 @@ import { ClientConfigurationComponent } from './components/client-configuration/
 import { ClientComponent } from './components/client-configuration/client/client.component';
 import { SitesComponent } from './components/client-configuration/sites/sites.component';
 import { LoginComponent } from './components/login/login.component';
+import {TasksComponent} from './components/site-model/tasks/tasks.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SidenavComponent,
-    NavElementComponent,
-    SiteModelComponent,
-    ComponentsComponent,
-    MissionsComponent,
-    FilterComponent,
-    SystemsComponent,
-    SiteSelectorComponent,
-    TitlebarComponent,
-    ClientConfigurationComponent,
-    ClientComponent,
-    SitesComponent,
-    LoginComponent,
-    SystemCruComponent
-  ],
+    declarations: [
+        AppComponent,
+        SidenavComponent,
+        NavElementComponent,
+        SiteModelComponent,
+        ComponentsComponent,
+        MissionsComponent,
+        FilterComponent,
+        SystemsComponent,
+        SiteSelectorComponent,
+        TitlebarComponent,
+        ClientConfigurationComponent,
+        ClientComponent,
+        SitesComponent,
+        LoginComponent,
+        SystemCruComponent,
+        TasksComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

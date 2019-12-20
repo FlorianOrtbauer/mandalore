@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api-service.service';
 import { ISystem } from 'src/classes/interfaces/ISystem';
 import { IArea } from 'src/classes/interfaces/IArea';
 import { IComponent } from 'src/classes/interfaces/IComponent';
+import {IMission} from '../../../classes/interfaces/IMission';
 
 @Component({
   selector: 'app-site-model',
@@ -11,9 +12,10 @@ import { IComponent } from 'src/classes/interfaces/IComponent';
 })
 export class SiteModelComponent implements OnInit {
   sites = [];
-  selectedArea: IArea; 
-  selectedSystems: ISystem[]; 
+  selectedArea: IArea;
+  selectedSystems: ISystem[];
   selectedComponents: IComponent[];
+  selectedMission: IMission[];
 
   constructor(private api:ApiService) { }
 
@@ -21,16 +23,16 @@ export class SiteModelComponent implements OnInit {
   }
 
   changeArea(area){
-    this.selectedArea = area; 
-    this.selectedSystems = []; 
+    this.selectedArea = area;
+    this.selectedSystems = [];
   }
 
   changeSystems(systems){
-    this.selectedSystems = systems;  
+    this.selectedSystems = systems;
   }
 
   changeComponents(components){
-    this.selectedComponents = components;  
+    this.selectedComponents = components;
   }
 
 }
