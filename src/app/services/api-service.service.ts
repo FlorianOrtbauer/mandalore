@@ -112,7 +112,7 @@ export class ApiService {
     
   }
 
-  deleteComponent(components: IComponent[])
+  deleteComponents(components: IComponent[])
   {
     components.forEach(component => {
       this.http.delete(this.baseurl+"/millenniumfalcon/components/" + component.id, 

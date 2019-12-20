@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SystemCruComponent } from './compnent-cru.component';
+import { ComponentCruComponent } from './component-cru.component';
 
 describe('SystemCruComponent', () => {
-  let component: SystemCruComponent;
-  let fixture: ComponentFixture<SystemCruComponent>;
+  let component: ComponentCruComponent;
+  let fixture: ComponentFixture<ComponentCruComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SystemCruComponent ]
+      declarations: [ ComponentCruComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SystemCruComponent);
+    fixture = TestBed.createComponent(ComponentCruComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

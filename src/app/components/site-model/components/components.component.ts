@@ -2,8 +2,8 @@ import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angu
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api-service.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
-import { SystemCruComponent } from '../dialogs/system-cru/system-cru.component';
-import { ISystem } from 'src/classes/interfaces/ISystem';
+import { ComponentCruComponent } from '../dialogs/component-cru/component-cru.component';
+import { ISystem } from 'src/classes/interfaces/ISystem'; 
 import { IComponent } from 'src/classes/interfaces/IComponent';
 import { SelectionModel } from '@angular/cdk/collections';
 import {MatSort} from '@angular/material/sort';
@@ -81,12 +81,13 @@ export class ComponentsComponent implements OnInit {
   {
     if(this.selection.selected.length === 0)
     {
-      alert("No components selected!");
+      alert("No component selected!");
       return;
     }
       
     if(confirm("Are you sure to delete the selected components?")) {
-      console.log("DELETE!");
+      this.api.deleteComponents(this.selection.selected);
+      setTimeout(() => this.getComponents(),1000);
     }
   }
 
@@ -126,7 +127,7 @@ export class ComponentsComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
 
-    this.dialog.open(SystemCruComponent, dialogConfig);
+    this.dialog.open(ComponentCruComponent, dialogConfig);
   }
 
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ISystem } from 'src/classes/interfaces/ISystem';
-import { IArea } from 'src/classes/interfaces/IArea';
 import { ApiService } from 'src/app/services/api-service.service';
 import { IComponent } from 'src/classes/interfaces/IComponent';
 
@@ -10,17 +9,17 @@ import { IComponent } from 'src/classes/interfaces/IComponent';
   templateUrl: './component-cru.component.html',
   styleUrls: ['./component-cru.component.scss']
 })
-export class SystemCruComponent implements OnInit {
+export class ComponentCruComponent implements OnInit {
 
   component: IComponent; 
   originalComponent: IComponent; 
 
   isEdit: boolean; 
-  idDelete: boolean;
+  isDelete: boolean;
   title: string; 
   @Input() system: ISystem; 
   
-  constructor(private dialogRef: MatDialogRef<SystemCruComponent>,
+  constructor(private dialogRef: MatDialogRef<ComponentCruComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private api:ApiService) { 
       console.log(data); 
@@ -55,14 +54,6 @@ export class SystemCruComponent implements OnInit {
     else
       this.api.editComponent(this.component); 
     this.dialogRef.close();
-  }
-
-  delete() {
-    if(this.isDelete) {
-      this.api.deleteComponent(this.component)
-    } else {
-      this.api.deleteComponent(this.component)
-    }
   }
   
 }
