@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { ApiService } from 'src/app/services/api-service.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
-import { SystemCruComponent } from '../dialogs/system-cru/system-cru.component';
+import { MissionCruComponent } from '../dialogs/mission-cru/mission-cru.component';
 import { SelectionModel } from '@angular/cdk/collections';
 import {MatSort} from '@angular/material/sort';
 import { IComponent } from 'src/classes/interfaces/IComponent';
@@ -134,29 +134,27 @@ export class MissionsComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
 
-    this.dialog.open(SystemCruComponent, dialogConfig);
+    this.dialog.open(MissionCruComponent, dialogConfig);
   }
 
-  create(system){
-
-  }
-  edit(system){
-    if(this.selectedArea == null)
+  edit(mission){
+    
+    if(this.selectedComponents == null)
     {
-      alert("No area selected!");
-      return;
+      alert("No component selected!"); 
+      return; 
     }
-
+      
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {importedSystem: system};
+    dialogConfig.data = {importedMission: mission};
 
-    this.dialog.open(SystemCruComponent, dialogConfig);
+    this.dialog.open(MissionCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
-      setTimeout(() => this.getSystems(),1000);
-    });
+      setTimeout(() => this.getMissions(),1000);
+    }); 
   }
 
 }
