@@ -91,31 +91,31 @@ export class ApiService {
 
   /* --------------------------- COMPONENTS START -------------------------- */
 
-  editComponent(system: ISystem) : void
+  editComponent(component: IComponent) : void
   {
-    var systemData = {name: system.name, priority: system.priority}; 
+    var componentData = {name: component.name, priority: component.priority}; 
     //TODO: Only pass systemData but Django responses with BadRequest (400). 
     //Correction in Django needed @Florian
 
-    this.http.put<ISystem>(this.baseurl+"/millenniumfalcon/systems/" + system.id + "/", system, {headers: this.httpHeaders})
+    this.http.put<IComponent >(this.baseurl+"/millenniumfalcon/systems/" + component.id + "/", component, {headers: this.httpHeaders})
     .subscribe();
   }
 
-  addComponent(system: ISystem) : void
+  addComponent(component: IComponent) : void
   {
-    var systemData = {name: system.name, priority: system.priority}; 
+    var systemData = {name: component.name, priority: component.priority}; 
     //TODO: Only pass systemData but Django responses with BadRequest (400). 
     //Correction in Django needed @Florian
 
-    this.http.post<ISystem>(this.baseurl+"/millenniumfalcon/systems/", system, {headers: this.httpHeaders})
+    this.http.post<IComponent>(this.baseurl+"/millenniumfalcon/systems/", component, {headers: this.httpHeaders})
     .subscribe();
     
   }
 
-  deleteComponent(systems: ISystem[])
+  deleteComponent(components: IComponent[])
   {
-    systems.forEach(system => {
-      this.http.delete(this.baseurl+"/millenniumfalcon/systems/" + system.id, 
+    components.forEach(component => {
+      this.http.delete(this.baseurl+"/millenniumfalcon/components/" + component.id, 
       {headers: this.httpHeaders}).subscribe();
     });
   }

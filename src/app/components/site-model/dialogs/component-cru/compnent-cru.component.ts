@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ISystem } from 'src/classes/interfaces/ISystem';
 import { IArea } from 'src/classes/interfaces/IArea';
 import { ApiService } from 'src/app/services/api-service.service';
+import { IComponent } from 'src/classes/interfaces/IComponent';
 
 @Component({
   selector: 'app-component-cru',
@@ -11,12 +12,13 @@ import { ApiService } from 'src/app/services/api-service.service';
 })
 export class SystemCruComponent implements OnInit {
 
-  system: ISystem; 
-  originalSystem: ISystem; 
+  component: IComponent; 
+  originalComponent: IComponent; 
 
   isEdit: boolean; 
+  idDelete: boolean;
   title: string; 
-  @Input() area: IArea; 
+  @Input() system: ISystem; 
   
   constructor(private dialogRef: MatDialogRef<SystemCruComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -25,34 +27,42 @@ export class SystemCruComponent implements OnInit {
     }
 
   ngOnInit() { 
-    if(this.data.importedSystem)
+    if(this.data.importedComponent)
     {
-      this.title = "Edit system";
-      this.system = this.data.importedSystem; 
+      this.title = "Edit component";
+      this.component = this.data.importedComponent; 
       this.isEdit = true; 
     }
     else
     {
-      this.title = "Add new system"; 
-      this.system = {} as ISystem; 
-      this.system.area_id = this.data.area_id; 
+      this.title = "Add new component"; 
+      this.component = {} as IComponent; 
+      this.component.system_id = this.data.system_id; 
       this.isEdit = false; 
     }
       
   }
 
   cancel() {
-    this.system = this.originalSystem;  
-    console.log(this.system); 
+    this.component = this.originalComponent;  
+    console.log(this.component); 
     this.dialogRef.close();
   }
 
   save() {
     if(this.isEdit)
-      this.api.editSystem(this.system); 
+      this.api.editComponent(this.component); 
     else
-      this.api.addSystem(this.system); 
+      this.api.editComponent(this.component); 
     this.dialogRef.close();
+  }
+
+  delete() {
+    if(this.isDelete) {
+      this.api.deleteComponent(this.component)
+    } else {
+      this.api.deleteComponent(this.component)
+    }
   }
   
 }
