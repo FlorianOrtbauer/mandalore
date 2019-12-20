@@ -25,11 +25,11 @@ export class MissionsComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'name', 'priority',
     'short_desc', 'mission_type', 'edit']; //'instruction
-  expandedElement = 'instruction'; 
+  expandedElement = 'instruction';
   dataSource: MatTableDataSource < IMission > = new MatTableDataSource([]);
   selection = new SelectionModel<IMission>(false, [], );
 
-  @Input() selectedComponents: IComponent[]; 
+  @Input() selectedComponents: IComponent[];
 
   constructor(private api:ApiService, private dialog:MatDialog) {
   }
@@ -37,24 +37,24 @@ export class MissionsComponent implements OnInit {
 
   getMissions() {
     if(this.selectedComponents == null)
-      return; 
+      return;
 
 
-    var collectedData: IMission[] = []; 
+    var collectedData: IMission[] = [];
 
     for(var i = 0; i < this.selectedComponents.length; i++)
     {
-      
+
       let currentComponent = this.selectedComponents[i];
       this.api.getMissionsByComponents(currentComponent.id).subscribe (
-        (data) => { 
+        (data) => {
           for(var j = 0; j < data.length; j++)
           {
             var elem = data[j];
             elem.component = currentComponent;
-            collectedData.push(elem); 
+            collectedData.push(elem);
           }
-          this.dataSource = new MatTableDataSource(collectedData); 
+          this.dataSource = new MatTableDataSource(collectedData);
           this.dataSource.sort = this.sort;
         },
         error => {
@@ -71,10 +71,10 @@ export class MissionsComponent implements OnInit {
 
   ngOnChanges() {
     if(this.selectedComponents == null || this.selectedComponents.length == 0)
-      this.dataSource = new MatTableDataSource([]); 
+      this.dataSource = new MatTableDataSource([]);
 
     this.selection.clear();
-    this.getMissions(); 
+    this.getMissions();
   }
 
   delete()
@@ -84,7 +84,7 @@ export class MissionsComponent implements OnInit {
       alert("No missions selected!");
       return;
     }
-      
+
     if(confirm("Are you sure to delete the selected missions?")) {
       this.api.deleteMissions(this.selection.selected);
       this.getMissions();
@@ -94,8 +94,8 @@ export class MissionsComponent implements OnInit {
   toggleSelection($event, row)
   {
     if($event.target.tagName === "I")
-      return; 
-    this.selection.toggle(row); 
+      return;
+    this.selection.toggle(row);
   }
 
   applyFilter(filterValue: string) {
@@ -111,13 +111,13 @@ export class MissionsComponent implements OnInit {
   masterToggle() {
     if(this.isAllSelected())
     {
-      this.selection.clear(); 
-    } 
+      this.selection.clear();
+    }
     else
     {
       this.dataSource.data.forEach(row => this.selection.select(row));
     }
-        
+
   }
 
   checkboxLabel(row?: IMission): string {
@@ -127,15 +127,36 @@ export class MissionsComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
   }
 
-  
+
   openDialog() {
-      
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
 
     this.dialog.open(SystemCruComponent, dialogConfig);
+  }
+
+  create(system){
+
+  }
+  edit(system){
+    if(this.selectedArea == null)
+    {
+      alert("No area selected!");
+      return;
+    }
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {importedSystem: system};
+
+    this.dialog.open(SystemCruComponent, dialogConfig);
+    this.dialog.afterAllClosed.subscribe(() => {
+      setTimeout(() => this.getSystems(),1000);
+    });
   }
 
 }
