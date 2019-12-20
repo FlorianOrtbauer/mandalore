@@ -129,6 +129,4 @@ export class ComponentsComponent implements OnInit {
     this.dialog.open(SystemCruComponent, dialogConfig);
   }
 
-
-
 }

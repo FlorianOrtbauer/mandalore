@@ -5,9 +5,9 @@ import { IArea } from 'src/classes/interfaces/IArea';
 import { ApiService } from 'src/app/services/api-service.service';
 
 @Component({
-  selector: 'app-system-cru',
-  templateUrl: './system-cru.component.html',
-  styleUrls: ['./system-cru.component.scss']
+  selector: 'app-component-cru',
+  templateUrl: './component-cru.component.html',
+  styleUrls: ['./component-cru.component.scss']
 })
 export class SystemCruComponent implements OnInit {
 
