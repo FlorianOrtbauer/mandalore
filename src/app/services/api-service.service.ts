@@ -112,7 +112,35 @@ export class ApiService {
     
   }
 
-  deleteComponents(components: IComponent[])
+  getComponentsBySystems(systemsId): Observable<IComponent[]>{
+    const http$ = this.http.get<IComponent[]>(this.baseurl+"/millenniumfalcon/components?system_id=" + systemsId, {headers: this.httpHeaders});
+    
+    return http$;
+  }
+
+  /* ---------------- start missions --------------- */
+
+  editMission(mission: IMission) : void
+  {
+    var missionData = {name: mission.name, priority: mission.priority}; 
+    //TODO: Only pass missionData but Django responses with BadRequest (400). 
+    //Correction in Django needed @Florian
+
+    this.http.put<IMission>(this.baseurl+"/millenniumfalcon/missions/" + mission.id + "/", mission, {headers: this.httpHeaders})
+    .subscribe();
+  }
+
+  addMission(mission: IMission) : void
+  {
+    var missionData = {name: mission.name, priority: mission.priority}; 
+    //TODO: Only pass missionData but Django responses with BadRequest (400). 
+    //Correction in Django needed @Florian
+
+    this.http.post<IMission>(this.baseurl+"/millenniumfalcon/missions/", mission, {headers: this.httpHeaders})
+    .subscribe();
+    
+  }
+
   {
     components.forEach(component => {
       this.http.delete(this.baseurl+"/millenniumfalcon/components/" + component.id, 
@@ -120,14 +148,12 @@ export class ApiService {
     });
   }
 
-  getAllComponents(): Observable<IComponent[]>{
-    const http$ = this.http.get<IComponent[]>(this.baseurl+"/millenniumfalcon/components", {headers: this.httpHeaders});
+  getmissionsByArea(areaId): Observable<IMission[]>{
+    const http$ = this.http.get<IMission[]>(this.baseurl+"/millenniumfalcon/missions?area_id=" + areaId, {headers: this.httpHeaders});
     
     return http$;
   }
 
-  getComponentsBySystems(systemsId): Observable<IComponent[]>{
-    const http$ = this.http.get<IComponent[]>(this.baseurl+"/millenniumfalcon/components?system_id=" + systemsId, {headers: this.httpHeaders});
     
     return http$;
   }
@@ -160,5 +186,13 @@ export class ApiService {
     
     return http$;
   }
+
+  /* ----------------- end missions -----------------*/
 }
+
+  
+
+  
+
+
 

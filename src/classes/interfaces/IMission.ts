@@ -7,5 +7,6 @@ export interface IMission{
     short_desc: string; 
     instruction: string; 
     mission_type: string; 
-    component: IComponent; 
+    component: IComponent;
+    component_id: string;
  }
