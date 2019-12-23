@@ -20,7 +20,7 @@ export class ComponentsComponent implements OnInit {
   dataSource: MatTableDataSource < IComponent > = new MatTableDataSource([]);
   selection = new SelectionModel<IComponent>(false, [], );
   
-  @Input() selectedSystems: ISystem[];
+  @Input() selectedSystem: ISystem;
   @Output() componentsChanged = new EventEmitter<IComponent[]>();
 
   constructor(private api:ApiService, private dialog: MatDialog) { 
@@ -29,33 +29,36 @@ export class ComponentsComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  changeSelectedComponents() {
-    this.componentsChanged.emit(this.selection.selected);
-  }
-
-  getComponents() {
+   getComponents() {
     
-    var collectedData: IComponent[] = []; 
-
-    for(var i = 0; i < this.selectedSystems.length; i++)
-    {
-      
-      let currentSystem = this.selectedSystems[i];
-      this.api.getComponentsBySystems(currentSystem.id).subscribe (
-        (data) => { 
-          for(var j = 0; j < data.length; j++)
-          {
-            var elem = data[j];
-            elem.system = currentSystem;
-            collectedData.push(elem); 
-          }
-          this.dataSource = new MatTableDataSource(collectedData); 
+    console.log("Get Systems for "+this.selectedSystem)
+      this.api.getComponentsBySystems(this.selectedSystem.id)
+        .subscribe(data => {
+          data.forEach(element => {element.system = this.selectedSystem});
+          this.dataSource = new MatTableDataSource(data);  
           this.dataSource.sort = this.sort;
         },
         error => {
           console.log(error);
         }
-      )
+      );
+  }
+
+  changeSelectedComponents() {
+    this.componentsChanged.emit(this.selection.selected);
+  }
+
+  delete()
+  {
+    if(this.selection.selected.length === 0)
+    {
+      alert("No component selected!");
+      return;
+    }
+      
+    if(confirm("Are you sure to delete the selected components?")) {
+      this.api.deleteComponents(this.selection.selected);
+      setTimeout(() => this.getComponents(),1000);
     }
   }
 
@@ -71,25 +74,11 @@ export class ComponentsComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.selection.clear(); 
-    if(this.selectedSystems == null || this.selectedSystems.length == 0)
+    if(this.selectedSystem == null)
       this.dataSource = new MatTableDataSource([]); 
     
+    this.selection.clear();
     this.getComponents(); 
-  }
-
-  delete()
-  {
-    if(this.selection.selected.length === 0)
-    {
-      alert("No component selected!");
-      return;
-    }
-      
-    if(confirm("Are you sure to delete the selected components?")) {
-      this.api.deleteComponents(this.selection.selected);
-      setTimeout(() => this.getComponents(),1000);
-    }
   }
 
   applyFilter(filterValue: string) {
@@ -111,7 +100,6 @@ export class ComponentsComponent implements OnInit {
     {
       this.dataSource.data.forEach(row => this.selection.select(row));
     }
-        
   }
 
   checkboxLabel(row?: IComponent): string {
@@ -121,21 +109,32 @@ export class ComponentsComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
   }
 
-  openDialog() {
+  openAddDialog() {
 
+    if(this.selectedSystems == null)
+    {
+      alert("No system selected!"); 
+      return; 
+    }
+      
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.data =  {'area_id': this.selectedSystem.id}; 
 
-    this.dialog.open(ComponentCruComponent, dialogConfig);
+    this.dialog.open(SystemCruComponent, dialogConfig);
+    this.dialog.afterAllClosed.subscribe(() => {
+      setTimeout(() => this.getComponents(),1000);
+    });
+    
   }
 
   edit(component)
   {
-    if(this.selectedSystems == null)
+    if(this.selectedSystem == null)
     {
-      alert("No area selected!"); 
+      alert("No system selected!"); 
       return; 
     }
       

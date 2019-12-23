@@ -8,6 +8,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import {MatSort} from '@angular/material/sort';
 import { IComponent } from 'src/classes/interfaces/IComponent';
 import { IMission } from 'src/classes/interfaces/IMission';
+import { SystemCruComponent } from '../dialogs/system-cru/system-cru.component';
 
 @Component({
   selector: 'app-missions',
@@ -29,7 +30,7 @@ export class MissionsComponent implements OnInit {
   dataSource: MatTableDataSource < IMission > = new MatTableDataSource([]);
   selection = new SelectionModel<IMission>(false, [], );
 
-  @Input() selectedComponents: IComponent[];
+  @Input() selectedComponent: IComponent;
   @Output() missionsChanged = new EventEmitter<IMission[]>();
 
   constructor(private api:ApiService, private dialog:MatDialog) {
@@ -42,32 +43,17 @@ export class MissionsComponent implements OnInit {
   }
 
   getMissions() {
-    if(this.selectedComponents == null)
-      return;
-
-
-    var collectedData: IMission[] = [];
-
-    for(var i = 0; i < this.selectedComponents.length; i++)
-    {
-
-      let currentComponent = this.selectedComponents[i];
-      this.api.getMissionsByComponents(currentComponent.id).subscribe (
-        (data) => {
-          for(var j = 0; j < data.length; j++)
-          {
-            var elem = data[j];
-            elem.component = currentComponent;
-            collectedData.push(elem);
-          }
-          this.dataSource = new MatTableDataSource(collectedData);
+    console.log("Get Systems for "+this.selectedComponent)
+      this.api.getMissionsByComponents(this.selectedComponent.id)
+        .subscribe(data => {
+          data.forEach(element => {element.component = this.selectedComponent;});
+          this.dataSource = new MatTableDataSource(data);  
           this.dataSource.sort = this.sort;
         },
         error => {
           console.log(error);
         }
-      )
-    }
+      );
   }
 
 
@@ -76,7 +62,7 @@ export class MissionsComponent implements OnInit {
   }
 
   ngOnChanges() {
-    if(this.selectedComponents == null || this.selectedComponents.length == 0)
+    if(this.selectedComponent == null )
       this.dataSource = new MatTableDataSource([]);
 
     this.selection.clear();
@@ -134,18 +120,30 @@ export class MissionsComponent implements OnInit {
   }
 
 
-  openDialog() {
+  openAddDialog() {
+
+    if(this.selectedComponent == null)
+    {
+      alert("No area selected!"); 
+      return; 
+    }
+      
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.data =  {'area_id': this.selectedComponent.id}; 
 
-    this.dialog.open(MissionCruComponent, dialogConfig);
+    this.dialog.open(SystemCruComponent, dialogConfig);
+    this.dialog.afterAllClosed.subscribe(() => {
+      setTimeout(() => this.getMissions(),1000);
+    });
+    
   }
 
   edit(mission){
 
-    if(this.selectedComponents == null)
+    if(this.selectedComponent == null)
     {
       alert("No component selected!");
       return;
