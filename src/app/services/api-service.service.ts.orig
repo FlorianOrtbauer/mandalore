@@ -1,0 +1,206 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, BehaviorSubject, interval } from 'rxjs';
+import { catchError, first, retry } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { ISystem } from 'src/classes/interfaces/ISystem';
+import { IComponent } from 'src/classes/interfaces/IComponent';
+import { IArea } from 'src/classes/interfaces/IArea';
+import { ISite } from 'src/classes/interfaces/ISite';
+import { IMission } from 'src/classes/interfaces/IMission';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiService {
+
+ 
+
+  baseurl = "http://127.0.0.1:8000";
+  httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+
+
+
+  constructor(private http: HttpClient) { }  
+
+  getConfig() {
+    const http$ = this.http.get(this.baseurl+"/millenniumfalcon/sites", {headers: this.httpHeaders});
+    
+    return http$;
+  }
+
+   //------------------------- end connection ping ---------- 
+
+  getAllClients(): Observable<any>{
+    const http$ = this.http.get(this.baseurl+"/millenniumfalcon/clients", {headers: this.httpHeaders});
+    
+    return http$;
+  }
+
+  getAllSites(): Observable<any>{
+    const http$ = this.http.get(this.baseurl+"/millenniumfalcon/sites", {headers: this.httpHeaders});
+    
+    return http$;
+  }
+
+  getAllAreas(): Observable<IArea[]>{
+    const http$ = this.http.get<IArea[]>(this.baseurl+"/millenniumfalcon/areas", {headers: this.httpHeaders});
+    return http$;
+  }
+
+  getAreasBySite(siteId): Observable<IArea[]>{
+    const http$ = this.http.get<IArea[]>(this.baseurl+"/millenniumfalcon/areas?site_id=" + siteId, {headers: this.httpHeaders});
+    
+    return http$;
+  }
+
+  getAllSystems(): Observable<ISystem[]>{
+    const http$ = this.http.get<ISystem[]>(this.baseurl+"/millenniumfalcon/systems", {headers: this.httpHeaders});
+    
+    return http$;
+  }
+
+  editSystem(system: ISystem) : void
+  {
+    var systemData = {name: system.name, priority: system.priority}; 
+    //TODO: Only pass systemData but Django responses with BadRequest (400). 
+    //Correction in Django needed @Florian
+
+    this.http.put<ISystem>(this.baseurl+"/millenniumfalcon/systems/" + system.id + "/", system, {headers: this.httpHeaders})
+    .subscribe();
+  }
+
+  addSystem(system: ISystem) : void
+  {
+    var systemData = {name: system.name, priority: system.priority}; 
+    //TODO: Only pass systemData but Django responses with BadRequest (400). 
+    //Correction in Django needed @Florian
+
+    this.http.post<ISystem>(this.baseurl+"/millenniumfalcon/systems/", system, {headers: this.httpHeaders})
+    .subscribe();
+    
+  }
+
+  deleteSystems(systems: ISystem[])
+  {
+    systems.forEach(system => {
+      this.http.delete(this.baseurl+"/millenniumfalcon/systems/" + system.id, 
+      {headers: this.httpHeaders}).subscribe();
+    });
+  }
+
+  /* --------------------------- COMPONENTS START -------------------------- */
+
+  editComponent(component: IComponent) : void
+  {
+    var componentData = {name: component.name, priority: component.priority}; 
+    //TODO: Only pass systemData but Django responses with BadRequest (400). 
+    //Correction in Django needed @Florian
+
+    this.http.put<IComponent >(this.baseurl+"/millenniumfalcon/systems/" + component.id + "/", component, {headers: this.httpHeaders})
+    .subscribe();
+  }
+
+  addComponent(component: IComponent) : void
+  {
+    var systemData = {name: component.name, priority: component.priority}; 
+    //TODO: Only pass systemData but Django responses with BadRequest (400). 
+    //Correction in Django needed @Florian
+
+    this.http.post<IComponent>(this.baseurl+"/millenniumfalcon/systems/", component, {headers: this.httpHeaders})
+    .subscribe();
+    
+  }
+
+  deleteComponents(components: IComponent[])
+  {
+    components.forEach(component => {
+      this.http.delete(this.baseurl+"/millenniumfalcon/components/" + component.id, 
+      {headers: this.httpHeaders}).subscribe();
+    });
+  }
+
+  getAllComponents(): Observable<IComponent[]>{
+    const http$ = this.http.get<IComponent[]>(this.baseurl+"/millenniumfalcon/components", {headers: this.httpHeaders});
+    
+    return http$;
+  }
+
+  getComponentsBySystems(systemsId): Observable<IComponent[]>{
+    const http$ = this.http.get<IComponent[]>(this.baseurl+"/millenniumfalcon/components?system_id=" + systemsId, {headers: this.httpHeaders});
+    
+    return http$;
+  }
+
+<<<<<<< HEAD
+  /* --------------------------- COMPONENTS END -------------------------- */
+
+  getSystemsByArea(areaId): Observable<ISystem[]>{
+    const http$ = this.http.get<ISystem[]>(this.baseurl+"/millenniumfalcon/systems?area_id=" + areaId, {headers: this.httpHeaders});
+    
+    
+    return http$;
+=======
+  /* ---------------- start missions --------------- */
+
+  editMission(mission: IMission) : void
+  {
+    var missionData = {name: mission.name, priority: mission.priority}; 
+    //TODO: Only pass missionData but Django responses with BadRequest (400). 
+    //Correction in Django needed @Florian
+
+    this.http.put<IMission>(this.baseurl+"/millenniumfalcon/missions/" + mission.id + "/", mission, {headers: this.httpHeaders})
+    .subscribe();
+  }
+
+  addMission(mission: IMission) : void
+  {
+    var missionData = {name: mission.name, priority: mission.priority}; 
+    //TODO: Only pass missionData but Django responses with BadRequest (400). 
+    //Correction in Django needed @Florian
+
+    this.http.post<IMission>(this.baseurl+"/millenniumfalcon/missions/", mission, {headers: this.httpHeaders})
+    .subscribe();
+    
+>>>>>>> 3585cceb3d76f18babe229d148959ab1cfcd8bd3
+  }
+
+  deleteMissions(missions: IMission[])
+  {
+    missions.forEach(mission => {
+      this.http.delete(this.baseurl+"/millenniumfalcon/missions/" + mission.id, 
+      {headers: this.httpHeaders}).subscribe();
+    });
+  }
+
+<<<<<<< HEAD
+=======
+  getmissionsByArea(areaId): Observable<IMission[]>{
+    const http$ = this.http.get<IMission[]>(this.baseurl+"/millenniumfalcon/missions?area_id=" + areaId, {headers: this.httpHeaders});
+    
+    
+    return http$;
+  }
+
+>>>>>>> 3585cceb3d76f18babe229d148959ab1cfcd8bd3
+  getAllMissions(): Observable<IMission[]>{
+    const http$ = this.http.get<IMission[]>(this.baseurl+"/millenniumfalcon/missions", {headers: this.httpHeaders});
+    
+    return http$;
+  }
+
+  getMissionsByComponents(component_id): Observable<IMission[]>{
+    const http$ = this.http.get<IMission[]>(this.baseurl+"/millenniumfalcon/missions?component_id=" + component_id, {headers: this.httpHeaders});
+    
+    return http$;
+  }
+
+  /* ----------------- end missions -----------------*/
+}
+
+  
+
+  
+
+
+
