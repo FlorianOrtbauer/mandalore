@@ -30,10 +30,16 @@ export class MissionsComponent implements OnInit {
   selection = new SelectionModel<IMission>(false, [], );
 
   @Input() selectedComponents: IComponent[];
+  @Output() missionsChanged = new EventEmitter<IMission[]>();
 
   constructor(private api:ApiService, private dialog:MatDialog) {
+    this.selection.changed.subscribe((change) => this.changeSelectedMissions()) ;
   }
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  changeSelectedMissions() {
+    this.missionsChanged.emit(this.selection.selected);
+  }
 
   getMissions() {
     if(this.selectedComponents == null)
@@ -138,13 +144,13 @@ export class MissionsComponent implements OnInit {
   }
 
   edit(mission){
-    
+
     if(this.selectedComponents == null)
     {
-      alert("No component selected!"); 
-      return; 
+      alert("No component selected!");
+      return;
     }
-      
+
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -154,7 +160,7 @@ export class MissionsComponent implements OnInit {
     this.dialog.open(MissionCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
       setTimeout(() => this.getMissions(),1000);
-    }); 
+    });
   }
 
 }
