@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api-service.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { ComponentCruComponent } from '../dialogs/component-cru/component-cru.component';
-import { ISystem } from 'src/classes/interfaces/ISystem'; 
+import { ISystem } from 'src/classes/interfaces/ISystem';
 import { IComponent } from 'src/classes/interfaces/IComponent';
 import { SelectionModel } from '@angular/cdk/collections';
 import {MatSort} from '@angular/material/sort';
@@ -19,23 +19,23 @@ export class ComponentsComponent implements OnInit {
   displayedColumns: string[] = ['select', 'name', 'priority', 'edit'];
   dataSource: MatTableDataSource < IComponent > = new MatTableDataSource([]);
   selection = new SelectionModel<IComponent>(false, [], );
-  
+
   @Input() selectedSystem: ISystem;
   @Output() componentsChanged = new EventEmitter<IComponent[]>();
 
-  constructor(private api:ApiService, private dialog: MatDialog) { 
+  constructor(private api:ApiService, private dialog: MatDialog) {
     this.selection.changed.subscribe((change) => this.changeSelectedComponents()) ;
   }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
    getComponents() {
-    
+
     console.log("Get Systems for "+this.selectedSystem)
       this.api.getComponentsBySystems(this.selectedSystem.id)
         .subscribe(data => {
           data.forEach(element => {element.system = this.selectedSystem});
-          this.dataSource = new MatTableDataSource(data);  
+          this.dataSource = new MatTableDataSource(data);
           this.dataSource.sort = this.sort;
         },
         error => {
@@ -55,7 +55,7 @@ export class ComponentsComponent implements OnInit {
       alert("No component selected!");
       return;
     }
-      
+
     if(confirm("Are you sure to delete the selected components?")) {
       this.api.deleteComponents(this.selection.selected);
       setTimeout(() => this.getComponents(),1000);
@@ -69,16 +69,16 @@ export class ComponentsComponent implements OnInit {
   toggleSelection($event, row)
   {
     if($event.target.tagName === "I")
-      return; 
-    this.selection.toggle(row); 
+      return;
+    this.selection.toggle(row);
   }
 
   ngOnChanges() {
     if(this.selectedSystem == null)
-      this.dataSource = new MatTableDataSource([]); 
-    
+      this.dataSource = new MatTableDataSource([]);
+
     this.selection.clear();
-    this.getComponents(); 
+    this.getComponents();
   }
 
   applyFilter(filterValue: string) {
@@ -94,8 +94,8 @@ export class ComponentsComponent implements OnInit {
   masterToggle() {
     if(this.isAllSelected())
     {
-      this.selection.clear(); 
-    } 
+      this.selection.clear();
+    }
     else
     {
       this.dataSource.data.forEach(row => this.selection.select(row));
@@ -111,33 +111,33 @@ export class ComponentsComponent implements OnInit {
 
   openAddDialog() {
 
-    if(this.selectedSystems == null)
+    if(this.selectedSystem == null)
     {
-      alert("No system selected!"); 
-      return; 
+      alert("No system selected!");
+      return;
     }
-      
+
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data =  {'area_id': this.selectedSystem.id}; 
+    dialogConfig.data =  {'area_id': this.selectedSystem.id};
 
     this.dialog.open(SystemCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
       setTimeout(() => this.getComponents(),1000);
     });
-    
+
   }
 
   edit(component)
   {
     if(this.selectedSystem == null)
     {
-      alert("No system selected!"); 
-      return; 
+      alert("No system selected!");
+      return;
     }
-      
+
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -147,7 +147,7 @@ export class ComponentsComponent implements OnInit {
     this.dialog.open(SystemCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
       setTimeout(() => this.getComponents(),1000);
-    }); 
+    });
   }
 
 }
