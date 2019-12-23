@@ -11,49 +11,49 @@ import { IComponent } from 'src/classes/interfaces/IComponent';
 })
 export class ComponentCruComponent implements OnInit {
 
-  component: IComponent; 
-  originalComponent: IComponent; 
+  component: IComponent;
+  originalComponent: IComponent;
 
-  isEdit: boolean; 
+  isEdit: boolean;
   isDelete: boolean;
-  title: string; 
-  @Input() system: ISystem; 
-  
+  title: string;
+  @Input() system: ISystem;
+
   constructor(private dialogRef: MatDialogRef<ComponentCruComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private api:ApiService) { 
-      console.log(data); 
+    private api:ApiService) {
+      console.log(data);
     }
 
-  ngOnInit() { 
+  ngOnInit() {
     if(this.data.importedComponent)
     {
       this.title = "Edit component";
-      this.component = this.data.importedComponent; 
-      this.isEdit = true; 
+      this.component = this.data.importedComponent;
+      this.isEdit = true;
     }
     else
     {
-      this.title = "Add new component"; 
-      this.component = {} as IComponent; 
-      this.component.system_id = this.data.system_id; 
-      this.isEdit = false; 
+      this.title = "Add new component";
+      this.component = {} as IComponent;
+      this.component.system_id = this.data.system_id;
+      this.isEdit = false;
     }
-      
+
   }
 
   cancel() {
-    this.component = this.originalComponent;  
-    console.log(this.component); 
+    this.component = this.originalComponent;
+    console.log(this.component);
     this.dialogRef.close();
   }
 
   save() {
     if(this.isEdit)
-      this.api.editComponent(this.component); 
+      this.api.editComponent(this.component);
     else
-      this.api.editComponent(this.component); 
+      this.api.addComponent(this.component);
     this.dialogRef.close();
   }
-  
+
 }
