@@ -7,6 +7,7 @@ import { ISystem } from 'src/classes/interfaces/ISystem';
 import { IComponent } from 'src/classes/interfaces/IComponent';
 import { SelectionModel } from '@angular/cdk/collections';
 import {MatSort} from '@angular/material/sort';
+import { SystemCruComponent } from '../dialogs/system-cru/system-cru.component';
 
 @Component({
   selector: 'app-components',
@@ -128,6 +129,26 @@ export class ComponentsComponent implements OnInit {
     dialogConfig.autoFocus = true;
 
     this.dialog.open(ComponentCruComponent, dialogConfig);
+  }
+
+  edit(component)
+  {
+    if(this.selectedSystems == null)
+    {
+      alert("No area selected!"); 
+      return; 
+    }
+      
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {importetComponent: component};
+
+    this.dialog.open(SystemCruComponent, dialogConfig);
+    this.dialog.afterAllClosed.subscribe(() => {
+      setTimeout(() => this.getComponents(),1000);
+    }); 
   }
 
 }
