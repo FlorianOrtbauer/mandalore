@@ -31,7 +31,7 @@ export class ComponentsComponent implements OnInit {
 
    getComponents() {
 
-    console.log("Get Systems for "+this.selectedSystem)
+    console.log("Get components for "+this.selectedSystem)
       this.api.getComponentsBySystems(this.selectedSystem.id)
         .subscribe(data => {
           data.forEach(element => {element.system = this.selectedSystem});

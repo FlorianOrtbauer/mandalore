@@ -13,9 +13,9 @@ import {IMission} from '../../../classes/interfaces/IMission';
 export class SiteModelComponent implements OnInit {
   sites = [];
   selectedArea: IArea;
-  selectedSystems: ISystem[];
-  selectedComponents: IComponent[];
-  selectedMission: IMission[];
+  selectedSystem: ISystem;
+  selectedComponent: IComponent;
+  selectedMission: IMission;
 
   constructor(private api:ApiService) { }
 
@@ -24,15 +24,17 @@ export class SiteModelComponent implements OnInit {
 
   changeArea(area){
     this.selectedArea = area;
-    this.selectedSystems = [];
+    this.selectedSystem = null;
   }
 
-  changeSystems(systems){
-    this.selectedSystems = systems;
+  changeSystem(systems){
+    this.selectedSystem = systems[0];
+    
   }
 
-  changeComponents(components){
-    this.selectedComponents = components;
+  changeComponent(components){
+    this.selectedComponent = components[0];
+    console.log("component changed in sitemodel: " + this.selectedComponent); 
   }
 
 }
