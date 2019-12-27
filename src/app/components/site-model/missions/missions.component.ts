@@ -140,7 +140,7 @@ export class MissionsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {importedComponent: mission};
+    dialogConfig.data = {importedMission: mission};
 
     this.dialog.open(MissionCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
