@@ -1,9 +1,9 @@
 <div class="table-component mat-elevation-z2">
-    
+
   <div class="table-header">
       <h3>Missions</h3>
       <div>
-        <button mat-icon-button (click)="openDialog();"><i class="material-icons">add</i></button>
+        <button mat-icon-button (click)="openAddDialog();"><i class="material-icons">add</i></button>
         <button mat-icon-button (click)="delete();"><i class="material-icons">delete_outline</i></button>
       </div>
   </div>
@@ -11,9 +11,9 @@
   <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
   </mat-form-field>
-    
-  <table mat-table 
-          [dataSource]="dataSource" 
+
+  <table mat-table
+          [dataSource]="dataSource"
           matSort
           multiTemplateDataRows
           class="mat-elevation-z2">
@@ -54,7 +54,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Instruction </th>
       <td mat-cell *matCellDef="let element"> {{element.instruction}} </td>
     </ng-container-->
-  
+
     <!-- Mission Type Column -->
     <ng-container matColumnDef="mission_type">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Mission Type </th>
@@ -63,7 +63,7 @@
 
     <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef> Edit </th>
-        <td mat-cell *matCellDef="let element" (click)="editMission()"><button mat-icon-button (click)="edit();"><i class="material-icons">more_vert</i></button></td>
+        <td mat-cell *matCellDef="let element"><button mat-icon-button (click)="edit(element);"><i class="material-icons">more_vert</i></button></td>
     </ng-container>
 
     <ng-container matColumnDef="instruction">
@@ -74,16 +74,15 @@
         </div>
       </td>
     </ng-container>
-  
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns" sticky:true></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
         class="example-element-row"
         [class.example-expanded-row]="expandedElement === element"
         (click)="toggleSelection($event, row); expandedElement = expandedElement === element ? null : element">
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['instruction']" class="example-detail-row"></tr>
-    
+
   </table>
- 
+
 </div>
-     

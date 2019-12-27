@@ -6,7 +6,6 @@ export interface IMission{
     priority: string;
     short_desc: string; 
     instruction: string; 
-    mission_type: string; 
     component: IComponent;
     component_id: string;
  }

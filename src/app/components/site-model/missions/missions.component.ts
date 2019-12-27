@@ -1,53 +1,40 @@
-import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 import { ApiService } from 'src/app/services/api-service.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { MissionCruComponent } from '../dialogs/mission-cru/mission-cru.component';
-import { SelectionModel } from '@angular/cdk/collections';
-import {MatSort} from '@angular/material/sort';
 import { IComponent } from 'src/classes/interfaces/IComponent';
 import { IMission } from 'src/classes/interfaces/IMission';
-import { SystemCruComponent } from '../dialogs/system-cru/system-cru.component';
+import { SelectionModel } from '@angular/cdk/collections';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-missions',
   templateUrl: './missions.component.html',
-  styleUrls: ['./missions.component.scss'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ])
-  ],
+  styleUrls: ['./missions.component.scss']
 })
 export class MissionsComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'name', 'priority',
-    'short_desc', 'mission_type', 'edit']; //'instruction
-  expandedElement = 'instruction';
+  displayedColumns: string[] = ['select', 'name', 'priority', 'short_desc', 'mission_type', 'edit'];
   dataSource: MatTableDataSource < IMission > = new MatTableDataSource([]);
   selection = new SelectionModel<IMission>(false, [], );
 
   @Input() selectedComponent: IComponent;
   @Output() missionsChanged = new EventEmitter<IMission[]>();
 
-  constructor(private api:ApiService, private dialog:MatDialog) {
+  constructor(private api:ApiService, private dialog: MatDialog) {
     this.selection.changed.subscribe((change) => this.changeSelectedMissions()) ;
   }
+
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  changeSelectedMissions() {
-    this.missionsChanged.emit(this.selection.selected);
-  }
-
   getMissions() {
-    console.log("Get Systems for "+this.selectedComponent)
-      this.api.getMissionsByComponents(this.selectedComponent.id)
-        .subscribe(data => {
-          data.forEach(element => {element.component = this.selectedComponent;});
-          this.dataSource = new MatTableDataSource(data);  
+
+    console.log("Get missions for "+this.selectedComponent)
+    this.api.getMissionsByComponents(this.selectedComponent.id)
+      .subscribe(data => {
+          data.forEach(element => {element.component = this.selectedComponent});
+          this.dataSource = new MatTableDataSource(data);
           this.dataSource.sort = this.sort;
         },
         error => {
@@ -56,17 +43,8 @@ export class MissionsComponent implements OnInit {
       );
   }
 
-
-  ngOnInit() {
-    this.dataSource.sort = this.sort;
-  }
-
-  ngOnChanges() {
-    if(this.selectedComponent == null )
-      this.dataSource = new MatTableDataSource([]);
-
-    this.selection.clear();
-    this.getMissions();
+  changeSelectedMissions() {
+    this.missionsChanged.emit(this.selection.selected);
   }
 
   delete()
@@ -79,8 +57,12 @@ export class MissionsComponent implements OnInit {
 
     if(confirm("Are you sure to delete the selected missions?")) {
       this.api.deleteMissions(this.selection.selected);
-      this.getMissions();
+      setTimeout(() => this.getMissions(),1000);
     }
+  }
+
+  ngOnInit() {
+    this.dataSource.sort = this.sort;
   }
 
   toggleSelection($event, row)
@@ -88,6 +70,14 @@ export class MissionsComponent implements OnInit {
     if($event.target.tagName === "I")
       return;
     this.selection.toggle(row);
+  }
+
+  ngOnChanges() {
+    if(this.selectedComponent == null)
+      this.dataSource = new MatTableDataSource([]);
+
+    this.selection.clear();
+    this.getMissions();
   }
 
   applyFilter(filterValue: string) {
@@ -109,7 +99,6 @@ export class MissionsComponent implements OnInit {
     {
       this.dataSource.data.forEach(row => this.selection.select(row));
     }
-
   }
 
   checkboxLabel(row?: IMission): string {
@@ -119,29 +108,7 @@ export class MissionsComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
   }
 
-
   openAddDialog() {
-
-    if(this.selectedComponent == null)
-    {
-      alert("No area selected!"); 
-      return; 
-    }
-      
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data =  {'area_id': this.selectedComponent.id}; 
-
-    this.dialog.open(SystemCruComponent, dialogConfig);
-    this.dialog.afterAllClosed.subscribe(() => {
-      setTimeout(() => this.getMissions(),1000);
-    });
-    
-  }
-
-  edit(mission){
 
     if(this.selectedComponent == null)
     {
@@ -151,6 +118,26 @@ export class MissionsComponent implements OnInit {
 
     const dialogConfig = new MatDialogConfig();
 
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data =  {'component_id': this.selectedComponent.id};
+
+    this.dialog.open(MissionCruComponent, dialogConfig);
+    this.dialog.afterAllClosed.subscribe(() => {
+      setTimeout(() => this.getMissions(),1000);
+    });
+
+  }
+
+  edit(mission)
+  {
+    if(this.selectedComponent == null)
+    {
+      alert("No component selected!");
+      return;
+    }
+
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {importedMission: mission};
