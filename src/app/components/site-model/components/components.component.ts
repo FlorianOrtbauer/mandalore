@@ -121,9 +121,9 @@ export class ComponentsComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data =  {'area_id': this.selectedSystem.id};
+    dialogConfig.data =  {'system_id': this.selectedSystem.id};
 
-    this.dialog.open(SystemCruComponent, dialogConfig);
+    this.dialog.open(ComponentCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
       setTimeout(() => this.getComponents(),1000);
     });
@@ -139,12 +139,11 @@ export class ComponentsComponent implements OnInit {
     }
 
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {importetComponent: component};
+    dialogConfig.data = {importedComponent: component};
 
-    this.dialog.open(SystemCruComponent, dialogConfig);
+    this.dialog.open(ComponentCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
       setTimeout(() => this.getComponents(),1000);
     });

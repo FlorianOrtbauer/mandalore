@@ -73,10 +73,6 @@ export class ApiService {
 
   addSystem(system: ISystem) : void
   {
-    var systemData = {name: system.name, priority: system.priority};
-    //TODO: Only pass systemData but Django responses with BadRequest (400).
-    //Correction in Django needed @Florian
-
     this.http.post<ISystem>(this.baseurl+"/millenniumfalcon/systems/", system, {headers: this.httpHeaders})
     .subscribe();
 
@@ -173,21 +169,13 @@ export class ApiService {
   
   editComponent(component: IComponent) : void
   {
-    var componentData = {name: component.name, priority: component.priority}; 
-    //TODO: Only pass systemData but Django responses with BadRequest (400). 
-    //Correction in Django needed @Florian
-
-    this.http.put<IComponent >(this.baseurl+"/millenniumfalcon/systems/" + component.id + "/", component, {headers: this.httpHeaders})
+    this.http.put<IComponent >(this.baseurl+"/millenniumfalcon/components/" + component.id + "/", component, {headers: this.httpHeaders})
     .subscribe();
   }
 
   addComponent(component: IComponent) : void
   {
-    var systemData = {name: component.name, priority: component.priority}; 
-    //TODO: Only pass systemData but Django responses with BadRequest (400). 
-    //Correction in Django needed @Florian
-
-    this.http.post<IComponent>(this.baseurl+"/millenniumfalcon/systems/", component, {headers: this.httpHeaders})
+    this.http.post<IComponent>(this.baseurl+"/millenniumfalcon/components/", component, {headers: this.httpHeaders})
     .subscribe();    
   }
   
