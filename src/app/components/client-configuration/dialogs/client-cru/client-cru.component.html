@@ -1,0 +1,57 @@
+<div class="content">
+    <form #clientForm="ngForm">
+        <h1 mat-dialog-title>{{title}}</h1>
+
+        <div mat-dialog-content>
+            <mat-form-field>
+                <input matInput placeholder="clientname" [(ngModel)]="client.name" name="name" required minlength="3">
+            </mat-form-field>
+        </div>
+        <div *ngIf="clientForm?.controls?.name?.errors?.required" style="color: red">
+                Name is required.
+        </div>
+        <div *ngIf="clientForm?.controls?.name?.errors?.minlength" style="color: red">
+                Name must be at least 3 characters long.
+        </div>
+
+        <div mat-dialog-content>
+            <mat-form-field>
+                <input matInput placeholder="Priority" [(ngModel)]="client.priority" name="priority" required>
+            </mat-form-field>
+        </div>
+        <div *ngIf="clientForm?.controls?.priority?.errors?.required" style="color: red">
+                Priority is required.
+        </div>
+
+        <div mat-dialog-content>
+            <mat-form-field>
+                <input matInput placeholder="Country" [(ngModel)]="client.country" name="country" required minlength="3" maxlength="3">
+            </mat-form-field>
+        </div>
+        <div *ngIf="clientForm?.controls?.country?.errors?.required" style="color: red">
+                Country is required.
+        </div>
+        <div *ngIf="clientForm?.controls?.country?.errors?.minlength" style="color: red">
+                Country must be 3 characters long.
+        </div>
+
+        <div mat-dialog-content>
+            <mat-form-field>
+                <input matInput placeholder="Street + Streetnumber" [(ngModel)]="client.address_line_1" name="addressline1" required minlength="3">
+            </mat-form-field>
+        </div>
+        <div *ngIf="clientForm?.controls?.addressline1?.errors?.required" style="color: red">
+                Adress is required.
+        </div>
+        <div *ngIf="clientForm?.controls?.addressline1?.errors?.minlength" style="color: red">
+                Adress must be at least 3 characters long.
+        </div>
+        
+        <div mat-dialog-actions>
+            <button mat-button (click)="cancel()">Cancel</button>
+            <button mat-button (click)="save()" cdkFocusInitial [disabled]="!clientForm?.valid">Save</button>
+        </div>
+    </form>   
+</div>
+
+

@@ -8,6 +8,7 @@ import { IComponent } from 'src/classes/interfaces/IComponent';
 import { ITask } from 'src/classes/interfaces/ITask';
 import { IArea } from 'src/classes/interfaces/IArea';
 import { ISite } from 'src/classes/interfaces/ISite';
+import { IClient } from 'src/classes/interfaces/IClient';
 import { IMission } from 'src/classes/interfaces/IMission';
 
 @Injectable({
@@ -35,9 +36,29 @@ export class ApiService {
     const http$ = this.http.get(this.baseurl+"/millenniumfalcon/clients", {headers: this.httpHeaders});
     return http$;
   }
+  editClient(client: IClient) : void
+  {
+    this.http.put<IClient>(this.baseurl+"/millenniumfalcon/clients/" + client.id + "/", client, {headers: this.httpHeaders})
+    .subscribe();
+  }
+  addClient(client: IClient) : void
+  {
+    this.http.post<IClient>(this.baseurl+"/millenniumfalcon/clients/", client, {headers: this.httpHeaders})
+    .subscribe();
+  }
+  deleteClient(client: IClient)
+  {
+    this.http.delete(this.baseurl+"/millenniumfalcon/clients/" + client.id,  {headers: this.httpHeaders})
+    .subscribe();
+  }
+
 
   getAllSites(): Observable<any>{
     const http$ = this.http.get(this.baseurl+"/millenniumfalcon/sites", {headers: this.httpHeaders});
+    return http$;
+  }
+  getSitesByClient(clientId): Observable<ISite[]>{
+    const http$ = this.http.get<ISite[]>(this.baseurl+"/millenniumfalcon/sites?client_id=" + clientId, {headers: this.httpHeaders});
     return http$;
   }
   editSite(site: ISite) : void

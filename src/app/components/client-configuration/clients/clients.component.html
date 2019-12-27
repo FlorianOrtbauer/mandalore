@@ -1,9 +1,9 @@
 <div class="table-component mat-elevation-z3">
     <!-- Component Header -------------------------------------------------------------->
         <div class="table-header">
-            <h3>Sites</h3>
+            <h3>Clients</h3>
             <div>
-              <button mat-icon-button (click)="AddNewSite();"><i class="material-icons">add</i></button>
+              <button mat-icon-button (click)="AddNewClient();"><i class="material-icons">add</i></button>
             </div>
         </div>
     
@@ -15,7 +15,7 @@
     <!-- Data Table -------------------------------------------------------------------->
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z3">
       
-      <!-- Checkbox Column --------------------------------------------------------->
+         <!-- Checkbox Column --------------------------------------------------------->
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
         </th>
@@ -27,7 +27,7 @@
           </mat-checkbox>
         </td>
       </ng-container>
-      
+
         <!-- Name Column ----------------------------------------------------------->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
@@ -59,11 +59,11 @@
       </ng-container>
         
         <!-- Table Row Definition -------------------------------------------------->
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-            (click)="toggleSelection($event, row)">
-        </tr>
-        </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          (click)="toggleSelection($event, row)">
+      </tr>
+      </table>
   <!-- TABLE END ------------------------------------------------------------------->
       
   </div>

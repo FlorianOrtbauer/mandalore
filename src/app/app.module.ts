@@ -38,7 +38,8 @@ import { SystemCruComponent } from './components/site-model/dialogs/system-cru/s
 import { SiteSelectorComponent } from './components/sidenav/site-selector/site-selector.component';
 import { TitlebarComponent } from './components/titlebar/titlebar.component';
 import { ClientConfigurationComponent } from './components/client-configuration/client-configuration.component';
-import { ClientComponent } from './components/client-configuration/client/client.component';
+import { ClientsComponent } from './components/client-configuration/clients/clients.component';
+import { ClientCruComponent } from './components/client-configuration/dialogs/client-cru/client-cru.component';
 import { SitesComponent } from './components/client-configuration/sites/sites.component';
 import { SiteCruComponent } from './components/client-configuration/dialogs/site-cru/site-cru.component';
 import { LoginComponent } from './components/login/login.component';
@@ -61,7 +62,8 @@ import { TaskCruComponent } from './components/site-model/dialogs/task-cru/task-
         SiteSelectorComponent,
         TitlebarComponent,
         ClientConfigurationComponent,
-        ClientComponent,
+        ClientsComponent,
+        ClientCruComponent,
         SitesComponent,
         SiteCruComponent,
         LoginComponent,
@@ -99,6 +101,7 @@ import { TaskCruComponent } from './components/site-model/dialogs/task-cru/task-
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
+    ClientCruComponent,
     SiteCruComponent,
     SystemCruComponent,
     ComponentCruComponent,

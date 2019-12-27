@@ -5,6 +5,6 @@
 </div>
 
 <div class="table-view-content">
-    <app-client></app-client>
-    <app-sites></app-sites>
+    <app-clients (clientChanged)="changeClient($event)"></app-clients>
+    <app-sites [selectedClient]="selectedClient" (sitesChanged)="changeSite($event)"></app-sites>
 </div>

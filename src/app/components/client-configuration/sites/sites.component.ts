@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api-service.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ISite } from 'src/classes/interfaces/ISite';
+import { IClient } from 'src/classes/interfaces/IClient';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { SiteCruComponent } from '../dialogs/site-cru/site-cru.component';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-sites',
@@ -13,38 +15,65 @@ import { SiteCruComponent } from '../dialogs/site-cru/site-cru.component';
 })
 export class SitesComponent implements OnInit {
 
+  //displayedColumns: string[] = ['select','name', 'priority', 'country', 'edit', 'delete'];
   displayedColumns: string[] = ['name', 'priority', 'country', 'edit', 'delete'];
   dataSource: MatTableDataSource < ISite > = new MatTableDataSource([]);
+  selection = new SelectionModel<ISite>(false, [], );
 
-  
+  @Input() selectedClient: IClient; 
   @Output() sitesChanged = new EventEmitter<ISite[]>();
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private api:ApiService, private dialog:MatDialog) { }
+  constructor(private api:ApiService, private dialog:MatDialog) {
+    this.selection.changed.subscribe((change) => {
+    console.log(this.selection.selected);
+    this.sitesChanged.emit(this.selection.selected)
+  });
+}
   
   ngOnInit() {
     this.getSites();
+    this.dataSource.sort = this.sort;
+  }
+
+  ngOnChanges() {
+    if(this.selectedClient == null)
+      return; 
+    this.getSites(); 
   }
 
   getSites() {
-    console.log("Get all Sites"); //Durch das User-Management im Backend werden nur die erlaubten Sites übermittelt
-    this.api.getAllSites()
+    if (!this.selectedClient){
+      console.log("no Client selected");
+      return
+    }
+
+    console.log("Get Sites of user:", this.selectedClient.id);
+
+
+    this.api.getSitesByClient(this.selectedClient.id)
       .subscribe(data => {
         this.dataSource = new MatTableDataSource(data);  
         this.dataSource.sort = this.sort;
       },
       error => {
         console.log(error);
-      }
-    );
+      });
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  changedSites() {
-    this.sitesChanged.emit();
+  toggleSelection($event, row)
+  {
+    if($event.target.tagName === "I")
+      return; 
+    this.selection.toggle(row); 
+  }
+
+  checkboxLabel(row?: ISite): string {
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
   }
 
   edit(site)
