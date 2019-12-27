@@ -33,7 +33,7 @@ export class SitesComponent implements OnInit {
   
   ngOnInit() {
     this.getSites();
-    this.dataSource.sort = this.sort;
+    //this.dataSource.sort = this.sort;
   }
 
   ngOnChanges() {
