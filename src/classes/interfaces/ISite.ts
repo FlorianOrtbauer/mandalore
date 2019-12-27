@@ -1,9 +1,9 @@
 export interface ISite {
     id: string; 
     name: string; 
-    priority: string; 
+    priority: number; 
     country: string; 
-    adress_line_1: string; 
-    adress_line_2: string; 
+    address_line_1: string; 
+    address_line_2: string; 
     client_id:string; 
 }

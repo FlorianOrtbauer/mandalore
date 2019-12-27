@@ -45,12 +45,17 @@ export class ApiService {
     this.http.put<ISite>(this.baseurl+"/millenniumfalcon/sites/" + site.id + "/", site, {headers: this.httpHeaders})
     .subscribe();
   }
-
   addSite(site: ISite) : void
   {
     this.http.post<ISite>(this.baseurl+"/millenniumfalcon/sites/", site, {headers: this.httpHeaders})
     .subscribe();
   }
+  deleteSite(site: ISite)
+  {
+    this.http.delete(this.baseurl+"/millenniumfalcon/sites/" + site.id,  {headers: this.httpHeaders})
+    .subscribe();
+  }
+
 
 
 

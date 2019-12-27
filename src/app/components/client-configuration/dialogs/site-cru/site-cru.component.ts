@@ -25,7 +25,7 @@ export class SiteCruComponent implements OnInit {
       console.log(data); 
     }
 
-  ngOnInit() { 
+    ngOnInit() { 
     if(this.data.importedSite)
     {
       this.title = "Edit site";
@@ -43,8 +43,8 @@ export class SiteCruComponent implements OnInit {
   }
 
   cancel() {
-    this.site = this.originalSite;  
-    console.log(this.site); 
+    // this.site = this.originalSite;  
+    // console.log(this.site); 
     this.dialogRef.close();
   }
 

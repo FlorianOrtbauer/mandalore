@@ -56,18 +56,50 @@ export class SitesComponent implements OnInit {
     // }
       
     console.log(site);
-    
+
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
     dialogConfig.data = {importedSite: site};
 
     this.dialog.open(SiteCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
-      setTimeout(() => this.getSites(),1000);
+      this.getSites();
     }); 
   }
+
+  AddNewSite() {
+
+    // if(this.selectedArea == null)
+    // {
+    //   alert("No area selected!"); 
+    //   return; 
+    // }
+      
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
+    dialogConfig.data =  {'client_id': '935fffae-a782-4b34-a161-cd420645aad3'}; 
+
+    this.dialog.open(SiteCruComponent, dialogConfig);
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getSites();
+    });
+    
+  }
+
+  delete(site)
+  {
+    if(confirm("Are you sure to delete the selected site?")) {
+      this.api.deleteSite(site);
+      setTimeout(() => this.getSites(),1000);
+    }
+  }
+
 
 
 }

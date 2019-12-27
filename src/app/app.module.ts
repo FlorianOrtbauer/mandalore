@@ -99,6 +99,7 @@ import { TaskCruComponent } from './components/site-model/dialogs/task-cru/task-
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
+    SiteCruComponent,
     SystemCruComponent,
     ComponentCruComponent,
     MissionCruComponent,
