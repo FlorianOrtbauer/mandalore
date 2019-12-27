@@ -1,7 +1,4 @@
 <div class="content">
-
-    
-
     <form #componentForm="ngForm">
         <h1 mat-dialog-title>{{title}}</h1>
         <div mat-dialog-content>
@@ -9,7 +6,7 @@
                 <input matInput placeholder="Component name" [(ngModel)]="component.name" name="name" required minlength="3">
             </mat-form-field>
         </div>
-        
+
         <div *ngIf="componentForm?.controls?.name?.errors?.required" style="color: red">
                 Name is required.
         </div>
@@ -31,8 +28,5 @@
             <button mat-button (click)="cancel()">Cancel</button>
             <button mat-button (click)="save()" cdkFocusInitial [disabled]="!componentForm?.valid">Save</button>
         </div>
-    </form>   
+    </form>
 </div>
-
-
-

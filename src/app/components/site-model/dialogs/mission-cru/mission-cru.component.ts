@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { IMission } from 'src/classes/interfaces/IMission';
-import { IArea } from 'src/classes/interfaces/IArea';
+import { IComponent } from 'src/classes/interfaces/IComponent';
 import { ApiService } from 'src/app/services/api-service.service';
+import { IMission } from 'src/classes/interfaces/IMission';
 
 @Component({
   selector: 'app-mission-cru',
@@ -15,14 +15,15 @@ export class MissionCruComponent implements OnInit {
   originalMission: IMission;
 
   isEdit: boolean;
+  isDelete: boolean;
   title: string;
-  @Input() area: IArea;
+  @Input() system: IComponent;
 
   constructor(private dialogRef: MatDialogRef<MissionCruComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private api:ApiService) {
-      console.log(data);
-    }
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private api:ApiService) {
+    console.log(data);
+  }
 
   ngOnInit() {
     if(this.data.importedMission)
@@ -54,6 +55,5 @@ export class MissionCruComponent implements OnInit {
       this.api.addMission(this.mission);
     this.dialogRef.close();
   }
-
 
 }

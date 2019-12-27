@@ -7,7 +7,6 @@ import { ISystem } from 'src/classes/interfaces/ISystem';
 import { IComponent } from 'src/classes/interfaces/IComponent';
 import { SelectionModel } from '@angular/cdk/collections';
 import {MatSort} from '@angular/material/sort';
-import { SystemCruComponent } from '../dialogs/system-cru/system-cru.component';
 
 @Component({
   selector: 'app-components',
