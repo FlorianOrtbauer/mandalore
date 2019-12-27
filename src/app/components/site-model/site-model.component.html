@@ -9,8 +9,8 @@
 <div class="table-view-content">
     <app-systems [selectedArea]="selectedArea" (systemsChanged)="changeSystem($event)"></app-systems>
     <app-components [selectedSystem]="selectedSystem" (componentsChanged)="changeComponent($event)"></app-components>
-    <app-missions [selectedComponent]="selectedComponent"></app-missions>
-    <app-tasks  [selectedMission]="selectedMission"></app-tasks>
+    <app-missions [selectedComponent]="selectedComponent" (missionsChanged)="changeMission($event)"></app-missions>
+    <app-tasks  [selectedMission]="selectedMission" (tasksChanged)="changeTask($event)"></app-tasks>
 </div>
 
 
