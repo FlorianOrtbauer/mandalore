@@ -40,6 +40,19 @@ export class ApiService {
     const http$ = this.http.get(this.baseurl+"/millenniumfalcon/sites", {headers: this.httpHeaders});
     return http$;
   }
+  editSite(site: ISite) : void
+  {
+    this.http.put<ISite>(this.baseurl+"/millenniumfalcon/sites/" + site.id + "/", site, {headers: this.httpHeaders})
+    .subscribe();
+  }
+
+  addSite(site: ISite) : void
+  {
+    this.http.post<ISite>(this.baseurl+"/millenniumfalcon/sites/", site, {headers: this.httpHeaders})
+    .subscribe();
+  }
+
+
 
   getAllAreas(): Observable<IArea[]>{
     const http$ = this.http.get<IArea[]>(this.baseurl+"/millenniumfalcon/areas", {headers: this.httpHeaders});

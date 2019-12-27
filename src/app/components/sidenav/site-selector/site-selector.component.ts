@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnChanges } from '@angular/core';
 import { ApiService } from 'src/app/services/api-service.service';
 import { ISite } from 'src/classes/interfaces/ISite';
 import { SiteSelectionService } from 'src/app/services/site-selection.service';
@@ -8,18 +8,26 @@ import { SiteSelectionService } from 'src/app/services/site-selection.service';
   templateUrl: './site-selector.component.html',
   styleUrls: ['./site-selector.component.scss']
 })
-export class SiteSelectorComponent implements OnInit {
+export class SiteSelectorComponent implements OnInit, OnChanges {
+  
   sites: ISite[];
   selectedSite: ISite;
   selectedSiteId: string;
   
+  // @Input....
   @Output() siteChanged = new EventEmitter<ISite>();
 
   constructor(private api:ApiService, private siteSelection:SiteSelectionService) {
     this.getSites();
   }
 
+  
+
   ngOnInit() {
+  }
+
+  ngOnChanges() {
+    this.getSites(); 
   }
 
   getSites = () => {
