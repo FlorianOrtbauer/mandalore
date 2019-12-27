@@ -7,11 +7,6 @@
 
 @include mat-table-columns((
   select: (width: $checkbox-column-width),
-  system: (width: $name-column-width),
-  component: (width: $name-column-width),
-  name: (width: $name-column-width),
-  priority: (width: $priority-column-width),
-  short_desc: (width: $short-desc-column-width),
-  mission_type: (width: $type-column-width),
+  mission: (width: $name-column-width),
   edit: (width: $edit-column-width)
 ));

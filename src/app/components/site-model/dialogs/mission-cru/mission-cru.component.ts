@@ -53,7 +53,7 @@ export class MissionCruComponent implements OnInit {
       this.api.editMission(this.mission);
     else
       this.api.addMission(this.mission);
-    this.dialogRef.close();
+      this.dialogRef.close();
   }
 
 }

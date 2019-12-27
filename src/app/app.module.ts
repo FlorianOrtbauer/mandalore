@@ -45,6 +45,7 @@ import { LoginComponent } from './components/login/login.component';
 import {TasksComponent} from './components/site-model/tasks/tasks.component';
 import { ComponentCruComponent } from './components/site-model/dialogs/component-cru/component-cru.component';
 import { MissionCruComponent } from './components/site-model/dialogs/mission-cru/mission-cru.component';
+import { TaskCruComponent } from './components/site-model/dialogs/task-cru/task-cru.component';
 
 
 @NgModule({
@@ -65,9 +66,10 @@ import { MissionCruComponent } from './components/site-model/dialogs/mission-cru
         SiteCruComponent,
         LoginComponent,
         SystemCruComponent,
-        TasksComponent, 
+        TasksComponent,
         ComponentCruComponent,
-        MissionCruComponent
+        MissionCruComponent,
+        TaskCruComponent
     ],
   imports: [
     BrowserModule,
@@ -97,9 +99,10 @@ import { MissionCruComponent } from './components/site-model/dialogs/mission-cru
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
-    SystemCruComponent, 
+    SystemCruComponent,
     ComponentCruComponent,
-    MissionCruComponent
+    MissionCruComponent,
+    TaskCruComponent
   ]
 })
 export class AppModule { }

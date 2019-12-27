@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api-service.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { TaskCruComponent } from '../dialogs/task-cru/task-cru.component';
-import { ITask } from 'src/classes/interfaces/ITask';
 import { IMission } from 'src/classes/interfaces/IMission';
+import { ITask } from 'src/classes/interfaces/ITask';
 import { SelectionModel } from '@angular/cdk/collections';
 import {MatSort} from '@angular/material/sort';
 
@@ -15,23 +15,25 @@ import {MatSort} from '@angular/material/sort';
 })
 export class TasksComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'name', 'priority', 'edit'];
+  displayedColumns: string[] = ['select', 'mission_id', 'edit'];
   dataSource: MatTableDataSource < ITask > = new MatTableDataSource([]);
   selection = new SelectionModel<ITask>(false, [], );
 
   @Input() selectedMission: IMission;
   @Output() tasksChanged = new EventEmitter<ITask[]>();
 
-  constructor(private api:ApiService, private dialog:MatDialog) {
+  constructor(private api:ApiService, private dialog: MatDialog) {
     this.selection.changed.subscribe((change) => this.changeSelectedTasks()) ;
   }
+
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   getTasks() {
-    console.log("Get Tasks for "+this.selectedMission)
+
+    console.log("Get tasks for "+this.selectedMission)
     this.api.getTasksByMission(this.selectedMission.id)
       .subscribe(data => {
-          data.forEach(element => {element.mission = this.selectedMission;});
+          data.forEach(element => {element.mission = this.selectedMission});
           this.dataSource = new MatTableDataSource(data);
           this.dataSource.sort = this.sort;
         },
@@ -39,7 +41,6 @@ export class TasksComponent implements OnInit {
           console.log(error);
         }
       );
-
   }
 
   changeSelectedTasks() {
@@ -73,7 +74,8 @@ export class TasksComponent implements OnInit {
 
   ngOnChanges() {
     if(this.selectedMission == null)
-      return;
+      this.dataSource = new MatTableDataSource([]);
+
     this.selection.clear();
     this.getTasks();
   }
@@ -97,7 +99,6 @@ export class TasksComponent implements OnInit {
     {
       this.dataSource.data.forEach(row => this.selection.select(row));
     }
-
   }
 
   checkboxLabel(row?: ITask): string {
@@ -106,7 +107,6 @@ export class TasksComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
   }
-
 
   openAddDialog() {
 
@@ -138,7 +138,6 @@ export class TasksComponent implements OnInit {
     }
 
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {importedTask: task};

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ITask } from 'src/classes/interfaces/ITask';
-import { IMission } from 'src/classes/interfaces/IMission';
+import { IMission} from 'src/classes/interfaces/IMission';
 import { ApiService } from 'src/app/services/api-service.service';
+import { ITask } from 'src/classes/interfaces/ITask';
 
 @Component({
   selector: 'app-task-cru',
@@ -11,49 +11,49 @@ import { ApiService } from 'src/app/services/api-service.service';
 })
 export class TaskCruComponent implements OnInit {
 
-  task: ITask; 
-  originalTask: ITask; 
+  task: ITask;
+  originalTask: ITask;
 
-  isEdit: boolean; 
-  title: string; 
-  @Input() mission: IMission; 
-  
+  isEdit: boolean;
+  isDelete: boolean;
+  title: string;
+  @Input() system: IMission;
+
   constructor(private dialogRef: MatDialogRef<TaskCruComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private api:ApiService) { 
-      console.log(data); 
-    }
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private api:ApiService) {
+    console.log(data);
+  }
 
-  ngOnInit() { 
+  ngOnInit() {
     if(this.data.importedTask)
     {
       this.title = "Edit task";
-      this.task = this.data.importedTask; 
-      this.isEdit = true; 
+      this.task = this.data.importedTask;
+      this.isEdit = true;
     }
     else
     {
-      this.title = "Add new task"; 
-      this.task = {} as ITask; 
-      this.task.mission_id = this.data.mission_id; 
-      this.isEdit = false; 
+      this.title = "Add new task";
+      this.task = {} as ITask;
+      this.task.mission_id = this.data.mission_id;
+      this.isEdit = false;
     }
-      
+
   }
 
   cancel() {
-    this.task = this.originalTask;  
-    console.log(this.task); 
+    this.task = this.originalTask;
+    console.log(this.task);
     this.dialogRef.close();
   }
 
   save() {
     if(this.isEdit)
-      this.api.editTask(this.task); 
+      this.api.editTask(this.task);
     else
-      this.api.addTask(this.task); 
-    this.dialogRef.close();
+      this.api.addTask(this.task);
+      this.dialogRef.close();
   }
-
 
 }
