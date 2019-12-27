@@ -37,14 +37,18 @@ export class SitesComponent implements OnInit {
   }
 
   ngOnChanges() {
-    if(this.selectedClient == null)
+    if(this.selectedClient == null){
+      this.dataSource=null;
       return; 
+    }
+      
     this.getSites(); 
   }
 
   getSites() {
     if (!this.selectedClient){
       console.log("no Client selected");
+      this.dataSource=null;
       return
     }
 
@@ -59,7 +63,7 @@ export class SitesComponent implements OnInit {
       error => {
         console.log(error);
       });
-  }
+    }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -106,13 +110,17 @@ export class SitesComponent implements OnInit {
     //   alert("No area selected!"); 
     //   return; 
     // }
-      
+    if (!this.selectedClient){
+      alert("Choose a Client first!");
+      return; 
+    }
+    
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '40%';
-    dialogConfig.data =  {'client_id': '935fffae-a782-4b34-a161-cd420645aad3'}; 
+    dialogConfig.data =  {'client_id': this.selectedClient.id}; 
 
     this.dialog.open(SiteCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {

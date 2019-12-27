@@ -36,6 +36,7 @@ import { FilterComponent } from './components/site-model/filter/filter.component
 import { SystemsComponent } from './components/site-model/systems/systems.component';
 import { SystemCruComponent } from './components/site-model/dialogs/system-cru/system-cru.component';
 import { SiteSelectorComponent } from './components/sidenav/site-selector/site-selector.component';
+import { ClientSelectorComponent } from './components/sidenav/client-selector/client-selector.component';
 import { TitlebarComponent } from './components/titlebar/titlebar.component';
 import { ClientConfigurationComponent } from './components/client-configuration/client-configuration.component';
 import { ClientsComponent } from './components/client-configuration/clients/clients.component';
@@ -60,6 +61,7 @@ import { TaskCruComponent } from './components/site-model/dialogs/task-cru/task-
         FilterComponent,
         SystemsComponent,
         SiteSelectorComponent,
+        ClientSelectorComponent,
         TitlebarComponent,
         ClientConfigurationComponent,
         ClientsComponent,

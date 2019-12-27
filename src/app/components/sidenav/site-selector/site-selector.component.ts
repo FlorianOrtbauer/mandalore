@@ -1,7 +1,8 @@
-import { Component, OnInit, EventEmitter, Output, OnChanges } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnChanges, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api-service.service';
 import { ISite } from 'src/classes/interfaces/ISite';
 import { SiteSelectionService } from 'src/app/services/site-selection.service';
+import { IClient } from 'src/classes/interfaces/IClient';
 
 @Component({
   selector: 'app-site-selector',
@@ -14,7 +15,7 @@ export class SiteSelectorComponent implements OnInit, OnChanges {
   selectedSite: ISite;
   selectedSiteId: string;
   
-  // @Input....
+  @Input() selectedClient: IClient; 
   @Output() siteChanged = new EventEmitter<ISite>();
 
   constructor(private api:ApiService, private siteSelection:SiteSelectionService) {
@@ -31,11 +32,19 @@ export class SiteSelectorComponent implements OnInit, OnChanges {
   }
 
   getSites = () => {
-    this.api.getAllSites().subscribe (data => {
+    if (!this.selectedClient){
+      console.log("no Client selected");
+      this.sites = [];
+      return
+    }
+
+    this.api.getSitesByClient(this.selectedClient.id)
+    .subscribe (data => {
         this.sites = data;
         console.log("site-selector getSites success"); 
       },
       error => {
+        this.sites=[];
         console.log(error);
       }
     )

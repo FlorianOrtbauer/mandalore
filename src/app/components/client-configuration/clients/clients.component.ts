@@ -3,7 +3,7 @@ import { ApiService } from 'src/app/services/api-service.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { IClient} from 'src/classes/interfaces/IClient';
-import { MatDialog, MatDialogConfig } from "@angular/material";
+import { MatDialog, MatDialogConfig, getMatIconFailedToSanitizeLiteralError } from "@angular/material";
 import { ClientCruComponent } from '../dialogs/client-cru/client-cru.component';
 import { SelectionModel } from '@angular/cdk/collections';
 
@@ -118,7 +118,10 @@ export class ClientsComponent implements OnInit {
   {
     if(confirm("Are you sure to delete the selected client?")) {
       this.api.deleteClient(client);
-      setTimeout(() => this.getClients(),1000);
+      setTimeout(() => {
+        this.getClients();
+      },1000);
+      
     }
   }
 
