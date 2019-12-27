@@ -134,7 +134,7 @@ export class MissionsComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.data =  {'area_id': this.selectedComponent.id}; 
 
-    this.dialog.open(SystemCruComponent, dialogConfig);
+    this.dialog.open(MissionCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
       setTimeout(() => this.getMissions(),1000);
     });
