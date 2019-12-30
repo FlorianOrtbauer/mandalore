@@ -3,67 +3,16 @@
     <h1 mat-dialog-title>{{title}}</h1>
     <div mat-dialog-content>
       <mat-form-field>
-        <input matInput placeholder="Task name" [(ngModel)]="task.name" name="name" required minlength="3">
+        <input matInput placeholder="Remark" [(ngModel)]="task.remark" name="remark" required minlength="3">
       </mat-form-field>
     </div>
 
-    <div *ngIf="taskForm?.controls?.name?.errors?.required" style="color: red">
-      Name is required.
+    <div *ngIf="taskForm?.controls?.remark?.errors?.required" style="color: red">
+      Remark is required.
     </div>
 
-    <div *ngIf="taskForm?.controls?.name?.errors?.minlength" style="color: red">
-      Name must be at least 3 characters long.
-    </div>
-
-    <div mat-dialog-content>
-      <mat-form-field>
-        <input matInput placeholder="Priority" [(ngModel)]="task.priority" name="priority" required>
-      </mat-form-field>
-    </div>
-    <div *ngIf="taskForm?.controls?.priority?.errors?.required" style="color: red">
-      Priority is required.
-    </div>
-
-    <div mat-dialog-content>
-      <mat-form-field>
-        <input matInput placeholder="Short description" [(ngModel)]="task.short_desc" name="short_desc" required minlength="2">
-      </mat-form-field>
-    </div>
-
-    <div *ngIf="taskForm?.controls?.short_desc?.errors?.required" style="color: red">
-      Short description is required.
-    </div>
-
-    <div *ngIf="taskForm?.controls?.short_desc?.errors?.minlength" style="color: red">
-      Short description must be at least 2 characters long.
-    </div>
-
-    <div mat-dialog-content>
-      <mat-form-field>
-        <input matInput placeholder="Instruction" [(ngModel)]="task.instruction" name="instruction" required minlength="5">
-      </mat-form-field>
-    </div>
-
-    <div *ngIf="taskForm?.controls?.instruction?.errors?.required" style="color: red">
-      Instruction is required.
-    </div>
-
-    <div *ngIf="taskForm?.controls?.instruction?.errors?.minlength" style="color: red">
-      Instruction must be at least 5 characters long.
-    </div>
-
-    <div mat-dialog-content>
-      <mat-form-field>
-        <input matInput placeholder="Mission ID" [(ngModel)]="task.mission_id" name="mission_id" required minlength="10">
-      </mat-form-field>
-    </div>
-
-    <div *ngIf="taskForm?.controls?.mission_id?.errors?.required" style="color: red">
-      Mission ID is required.
-    </div>
-
-    <div *ngIf="taskForm?.controls?.mission_id?.errors?.minlength" style="color: red">
-      Mission ID must be at least 10 characters long.
+    <div *ngIf="taskForm?.controls?.remark?.errors?.minlength" style="color: red">
+      Remark must be at least 5 characters long.
     </div>
 
     <div mat-dialog-actions>
