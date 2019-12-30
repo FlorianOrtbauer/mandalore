@@ -15,7 +15,7 @@ import {MatSort} from '@angular/material/sort';
 })
 export class TasksComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'mission_id', 'edit'];
+  displayedColumns: string[] = ['select', 'name', 'priority', 'short_desc', 'instruction', 'edit'];
   dataSource: MatTableDataSource < ITask > = new MatTableDataSource([]);
   selection = new SelectionModel<ITask>(false, [], );
 
