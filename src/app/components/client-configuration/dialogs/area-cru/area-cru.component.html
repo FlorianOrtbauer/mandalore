@@ -23,36 +23,6 @@
       Priority is required.
     </div>
 
-    <div mat-dialog-content>
-      <mat-form-field>
-        <input matInput placeholder="Country" [(ngModel)]="area.country" name="country" required minlength="3" maxlength="3">
-      </mat-form-field>
-    </div>
-    <div *ngIf="areaForm?.controls?.country?.errors?.required" style="color: red">
-      Country is required.
-    </div>
-    <div *ngIf="areaForm?.controls?.country?.errors?.minlength" style="color: red">
-      Country must be 3 characters long.
-    </div>
-
-    <div mat-dialog-content>
-      <mat-form-field>
-        <input matInput placeholder="Street + Streetnumber" [(ngModel)]="area.address_line_1" name="addressline1" required minlength="3">
-      </mat-form-field>
-    </div>
-    <div *ngIf="areaForm?.controls?.addressline1?.errors?.required" style="color: red">
-      Adress is required.
-    </div>
-    <div *ngIf="areaForm?.controls?.addressline1?.errors?.minlength" style="color: red">
-      Adress must be at least 3 characters long.
-    </div>
-
-    <div mat-dialog-content>
-      <mat-form-field>
-        <input matInput placeholder="PLZ + City" [(ngModel)]="area.address_line_2" name="addressline2">
-      </mat-form-field>
-    </div>
-
     <div mat-dialog-actions>
       <button mat-button (click)="cancel()">Cancel</button>
       <button mat-button (click)="save()" cdkFocusInitial [disabled]="!areaForm?.valid">Save</button>

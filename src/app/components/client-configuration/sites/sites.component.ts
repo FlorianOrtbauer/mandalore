@@ -115,6 +115,8 @@ export class SitesComponent implements OnInit {
       return;
     }
 
+    console.log("Selected Client ID: ", this.selectedClient.id);
+
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
