@@ -112,7 +112,8 @@ import { AreaCruComponent } from './components/client-configuration/dialogs/area
     SystemCruComponent,
     ComponentCruComponent,
     MissionCruComponent,
-    TaskCruComponent
+    TaskCruComponent,
+    AreaCruComponent
   ]
 })
 export class AppModule { }

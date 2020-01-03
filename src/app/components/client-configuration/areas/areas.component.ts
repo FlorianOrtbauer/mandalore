@@ -89,7 +89,7 @@ export class AreasComponent implements OnInit {
     //   return;
     // }
 
-    console.log(area);
+    console.log("edit area:", area);
 
     const dialogConfig = new MatDialogConfig();
 
@@ -122,6 +122,7 @@ export class AreasComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '40%';
     dialogConfig.data =  {'site_id': this.selectedSite.id};
+
 
     this.dialog.open(AreaCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
