@@ -36,7 +36,7 @@ export class AreaCruComponent implements OnInit {
     {
       this.title = "Add new area";
       this.area = {} as IArea;
-      this.area.site_id = this.data.area_id;
+      this.area.site_id = this.data.site_id;
       this.isEdit = false;
     }
 
