@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IClient } from 'src/classes/interfaces/IClient';
 import { ISite } from 'src/classes/interfaces/ISite';
+import { IArea } from 'src/classes/interfaces/IArea';
 
 @Component({
   selector: 'app-client-configuration',
@@ -10,6 +11,7 @@ import { ISite } from 'src/classes/interfaces/ISite';
 export class ClientConfigurationComponent implements OnInit {
   selectedClient: IClient;
   selectedSite: ISite;
+  selectedArea: IArea;
 
   constructor() { }
 
@@ -23,5 +25,10 @@ export class ClientConfigurationComponent implements OnInit {
   changeSite(sites){
     this.selectedSite = sites[0];
   }
+
+  changeArea(areas){
+    this.selectedArea = areas[0];
+  }
+
 
 }

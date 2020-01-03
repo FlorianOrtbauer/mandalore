@@ -16,11 +16,11 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class SitesComponent implements OnInit {
 
   //displayedColumns: string[] = ['select','name', 'priority', 'country', 'edit', 'delete'];
-  displayedColumns: string[] = ['name', 'priority', 'country', 'edit', 'delete'];
+  displayedColumns: string[] = ['select', 'name', 'priority', 'country', 'edit', 'delete'];
   dataSource: MatTableDataSource < ISite > = new MatTableDataSource([]);
   selection = new SelectionModel<ISite>(false, [], );
 
-  @Input() selectedClient: IClient; 
+  @Input() selectedClient: IClient;
   @Output() sitesChanged = new EventEmitter<ISite[]>();
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -30,7 +30,7 @@ export class SitesComponent implements OnInit {
     this.sitesChanged.emit(this.selection.selected)
   });
 }
-  
+
   ngOnInit() {
     this.getSites();
     //this.dataSource.sort = this.sort;
@@ -39,10 +39,10 @@ export class SitesComponent implements OnInit {
   ngOnChanges() {
     if(this.selectedClient == null){
       this.dataSource=null;
-      return; 
+      return;
     }
-      
-    this.getSites(); 
+
+    this.getSites();
   }
 
   getSites() {
@@ -57,7 +57,7 @@ export class SitesComponent implements OnInit {
 
     this.api.getSitesByClient(this.selectedClient.id)
       .subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);  
+        this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
       },
       error => {
@@ -72,8 +72,8 @@ export class SitesComponent implements OnInit {
   toggleSelection($event, row)
   {
     if($event.target.tagName === "I")
-      return; 
-    this.selection.toggle(row); 
+      return;
+    this.selection.toggle(row);
   }
 
   checkboxLabel(row?: ISite): string {
@@ -84,10 +84,10 @@ export class SitesComponent implements OnInit {
   {
     // if(this.selectedClient == null)
     // {
-    //   alert("No Client selected!"); 
-    //   return; 
+    //   alert("No Client selected!");
+    //   return;
     // }
-      
+
     console.log(site);
 
     const dialogConfig = new MatDialogConfig();
@@ -100,33 +100,33 @@ export class SitesComponent implements OnInit {
     this.dialog.open(SiteCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
       this.getSites();
-    }); 
+    });
   }
 
   AddNewSite() {
 
     // if(this.selectedArea == null)
     // {
-    //   alert("No area selected!"); 
-    //   return; 
+    //   alert("No area selected!");
+    //   return;
     // }
     if (!this.selectedClient){
       alert("Choose a Client first!");
-      return; 
+      return;
     }
-    
+
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '40%';
-    dialogConfig.data =  {'client_id': this.selectedClient.id}; 
+    dialogConfig.data =  {'client_id': this.selectedClient.id};
 
     this.dialog.open(SiteCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
       this.getSites();
     });
-    
+
   }
 
   delete(site)

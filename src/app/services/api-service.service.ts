@@ -89,6 +89,21 @@ export class ApiService {
     const http$ = this.http.get<IArea[]>(this.baseurl+"/millenniumfalcon/areas?site_id=" + siteId, {headers: this.httpHeaders});
     return http$;
   }
+  editArea(area: IArea) : void
+  {
+    this.http.put<IArea>(this.baseurl+"/millenniumfalcon/areas/" + area.id + "/", area, {headers: this.httpHeaders})
+      .subscribe();
+  }
+  addArea(area: IArea) : void
+  {
+    this.http.post<IArea>(this.baseurl+"/millenniumfalcon/areas/", area, {headers: this.httpHeaders})
+      .subscribe();
+  }
+  deleteArea(area: IArea)
+  {
+    this.http.delete(this.baseurl+"/millenniumfalcon/areas/" + area.id,  {headers: this.httpHeaders})
+      .subscribe();
+  }
 
   getAllSystems(): Observable<ISystem[]>{
     const http$ = this.http.get<ISystem[]>(this.baseurl+"/millenniumfalcon/systems", {headers: this.httpHeaders});

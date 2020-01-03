@@ -7,4 +7,6 @@
 <div class="table-view-content">
     <app-clients (clientChanged)="changeClient($event)"></app-clients>
     <app-sites [selectedClient]="selectedClient" (sitesChanged)="changeSite($event)"></app-sites>
+    <app-areas [selectedSite]="selectedSite" (areaChanged)="changeArea($event)"></app-areas>
+
 </div>
