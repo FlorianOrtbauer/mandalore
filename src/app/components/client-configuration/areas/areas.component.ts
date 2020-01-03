@@ -15,7 +15,7 @@ import {AreaCruComponent} from '../dialogs/area-cru/area-cru.component';
 })
 export class AreasComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'edit', 'delete']; //, 'priority', 'country', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'priority', 'edit', 'delete']; //, 'priority', 'country', 'edit', 'delete'];
   dataSource: MatTableDataSource < IArea > = new MatTableDataSource([]);
   selection = new SelectionModel<IArea>(false, [], );
 
