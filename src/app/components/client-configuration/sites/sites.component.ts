@@ -6,6 +6,7 @@ import { ISite } from 'src/classes/interfaces/ISite';
 import { IClient } from 'src/classes/interfaces/IClient';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { SiteCruComponent } from '../dialogs/site-cru/site-cru.component';
+import { DeleteDialogComponent } from '../dialogs/delete-dialog/delete-dialog.component';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
@@ -13,89 +14,68 @@ import { SelectionModel } from '@angular/cdk/collections';
   templateUrl: './sites.component.html',
   styleUrls: ['./sites.component.scss']
 })
+
+
 export class SitesComponent implements OnInit {
 
-  //displayedColumns: string[] = ['select','name', 'priority', 'country', 'edit', 'delete'];
+  //Config der Material-Table
   displayedColumns: string[] = ['select', 'name', 'priority', 'country', 'edit', 'delete'];
   dataSource: MatTableDataSource < ISite > = new MatTableDataSource([]);
-  selection = new SelectionModel<ISite>(false, [], );
+  //Config Selection
+  initialSelection = [];
+  allowMultiSelect:boolean = false;
+  selection = new SelectionModel<ISite>(this.allowMultiSelect, this.initialSelection);
 
   @Input() selectedClient: IClient;
   @Output() sitesChanged = new EventEmitter<ISite[]>();
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private api:ApiService, private dialog:MatDialog) {
+    
     this.selection.changed.subscribe((change) => {
-    console.log(this.selection.selected);
-    this.sitesChanged.emit(this.selection.selected)
-  });
+      console.log("Site Component selected:", this.selection.selected);
+      this.sitesChanged.emit(this.selection.selected);
+    });
 }
 
   ngOnInit() {
     this.getSites();
-    //this.dataSource.sort = this.sort;
   }
 
   ngOnChanges() {
     if(this.selectedClient == null){
+      //Kein Client gewählt --> Sites Table leeren
       this.dataSource=null;
-      return;
+    } else {
+      //Lade die zum Client zugehörigen Sites
+      this.getSites();
     }
-
-    this.getSites();
   }
 
   getSites() {
     if (!this.selectedClient){
-      console.log("no Client selected");
+      //Notwendig für das initiale Laden bei ngOnInit
+      console.log("Tried to Select site, but no Client selected");
       this.dataSource=null;
       return
     }
 
-    console.log("Get Sites of user:", this.selectedClient.id);
+    console.log("Load Sites of Client:", this.selectedClient.id);
 
-
-    this.api.getSitesByClient(this.selectedClient.id)
-      .subscribe(data => {
+    this.api.getSitesByClient(this.selectedClient.id).subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
-      },
-      error => {
-        console.log(error);
-      });
-    }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  toggleSelection($event, row)
-  {
-    if($event.target.tagName === "I")
-      return;
-    this.selection.toggle(row);
-  }
-
-  checkboxLabel(row?: ISite): string {
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
+    });
   }
 
   edit(site)
   {
-    // if(this.selectedClient == null)
-    // {
-    //   alert("No Client selected!");
-    //   return;
-    // }
-
-    console.log(site);
-
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '40%';
-    dialogConfig.data = {importedSite: site};
+    dialogConfig.data = {forwarededSite: site};
 
     this.dialog.open(SiteCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
@@ -105,24 +85,18 @@ export class SitesComponent implements OnInit {
 
   AddNewSite() {
 
-    // if(this.selectedArea == null)
-    // {
-    //   alert("No area selected!");
-    //   return;
-    // }
     if (!this.selectedClient){
       alert("Choose a Client first!");
       return;
     }
 
-    console.log("Selected Client ID: ", this.selectedClient.id);
+    console.log("Add new Site for Client ID: ", this.selectedClient.id);
 
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '40%';
-    dialogConfig.data =  {'client_id': this.selectedClient.id};
+    dialogConfig.data =  {client_id: this.selectedClient.id};
 
     this.dialog.open(SiteCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
@@ -131,13 +105,34 @@ export class SitesComponent implements OnInit {
 
   }
 
-  delete(site)
-  {
-    if(confirm("Are you sure to delete the selected site?")) {
-      this.api.deleteSite(site);
-      setTimeout(() => this.getSites(),1000);
-    }
+  delete(site){
+    //Öffne den Löschen Dialog
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
+    dialogConfig.data =  {forwardedObject: site, deleteType: "site"};
+
+    this.dialog.open(DeleteDialogComponent, dialogConfig);
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getSites();
+    });
   }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  toggleSelection($event, row)
+  {
+    this.selection.toggle(row);
+  }
+
+  checkboxLabel(row?: ISite): string {
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
+  }
+
+  
 
 
 
