@@ -2,10 +2,10 @@ import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angu
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api-service.service';
 import { MatDialog, MatDialogConfig } from "@angular/material";
-//import { SystemCruComponent } from '../dialogs/system-cru/system-cru.component';
 import { ISupplier } from 'src/classes/interfaces/ISupplier';
 import { SelectionModel } from '@angular/cdk/collections';
-import {MatSort} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
+import { SupplierCruComponent} from '../dialogs/supplier-cru/supplier-cru.component';
 
 @Component({
   selector: 'app-suppliers',
@@ -14,11 +14,11 @@ import {MatSort} from '@angular/material/sort';
 })
 export class SuppliersComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'name', 'address1', 'address2', 'address3', 'address4'];
+  displayedColumns: string[] = ['select', 'name', 'address1', 'address2', 'address3', 'address4', 'edit'];
   dataSource: MatTableDataSource < ISupplier > = new MatTableDataSource([]);
   selection = new SelectionModel<ISupplier>(false, [], );
 
-  @Output() systemsChanged = new EventEmitter<ISupplier[]>();
+  @Output() suppliersChanged = new EventEmitter<ISupplier[]>();
 
   constructor(private api:ApiService, private dialog:MatDialog) { 
     this.selection.changed.subscribe((change) => this.changeSelectedSuppliers()) ;
@@ -30,6 +30,7 @@ export class SuppliersComponent implements OnInit {
     this.getSuppliers();
     this.dataSource.sort = this.sort;
   }
+
 
 /**************************************************************
  * 
@@ -68,14 +69,25 @@ export class SuppliersComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
   }
-// End element selection logic
+
+  changeSelectedSuppliers() {
+    this.suppliersChanged.emit(this.selection.selected);
+  }
+  /* End element selection logic */
+
 
 /**************************************************************
  * 
  *  Data retrieval and modification logic
  * 
  *************************************************************/
+  
+  // Search box filter
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
+  // get all suppliers and fetch to table data source
   getSuppliers() {
     console.log("Get all Suppliers");
     this.api.getAllSuppliers()
@@ -90,15 +102,50 @@ export class SuppliersComponent implements OnInit {
     );
   }
 
-  changeSelectedSuppliers() {
-    this.systemsChanged.emit(this.selection.selected);
+  // delete checkbox selected suppliers
+  deleteSuppliers()
+  {
+    if(this.selection.selected.length === 0)
+    {
+      alert("Please select a supplier");
+      return;
+    }
+      
+    if(confirm("Are you sure to delete " + this.selection.selected.length + " selected systems?")) {
+      this.api.deleteSuppliers(this.selection.selected);
+      setTimeout(() => this.getSuppliers(),1000);
+    }
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  // add a new supplier via supplier-cru component
+  openAddSupplierDialog() 
+  {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {};
+
+    this.dialog.open(SupplierCruComponent, dialogConfig);
+    this.dialog.afterAllClosed.subscribe(() => {
+      setTimeout(() => this.getSuppliers(),1000);
+    });
   }
 
-//end data retrieval and modification logic
+  openEditSupplierDialog(supplier)
+  {
+    
+    const dialogConfig = new MatDialogConfig();
 
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {importedSupplier: supplier};
+
+    this.dialog.open(SupplierCruComponent, dialogConfig);
+    this.dialog.afterAllClosed.subscribe(() => {
+      setTimeout(() => this.getSuppliers(),1000);
+    }); 
+  }
+  /* end data retrieval and modification logic */
 
 }

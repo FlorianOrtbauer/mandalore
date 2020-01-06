@@ -240,11 +240,13 @@ export class ApiService {
     this.http.post<ISupplier>(this.baseurl+"/millenniumfalcon/suppliers/", supplier, {headers: this.httpHeaders})
     .subscribe();
   }
-  
-  deleteSupplier(supplier: ISupplier)
+
+  deleteSuppliers(suppliers: ISupplier[])
   {
-    this.http.delete(this.baseurl+"/millenniumfalcon/suppliers/" + supplier.id,  {headers: this.httpHeaders})
-    .subscribe();
+    suppliers.forEach(supplier => {
+      this.http.delete(this.baseurl+"/millenniumfalcon/suppliers/" + supplier.id,
+        {headers: this.httpHeaders}).subscribe();
+    });
   }
 
 

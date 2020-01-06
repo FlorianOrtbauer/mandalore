@@ -53,7 +53,6 @@ import { AreasComponent } from './components/client-configuration/areas/areas.co
 import { AreaCruComponent } from './components/client-configuration/dialogs/area-cru/area-cru.component';
 import { SupplierConfigurationComponent } from './components/supplier-configuration/supplier-configuration.component';
 import { SuppliersComponent } from './components/supplier-configuration/suppliers/suppliers.component';
-import { DialogsComponent } from './components/supplier-configuration/dialogs/dialogs.component';
 import { SupplierCruComponent } from './components/supplier-configuration/dialogs/supplier-cru/supplier-cru.component';
 
 
@@ -86,8 +85,7 @@ import { SupplierCruComponent } from './components/supplier-configuration/dialog
         AreaCruComponent,
         SupplierConfigurationComponent,
         SuppliersComponent,
-        DialogsComponent,
-        SupplierCruComponent
+        SupplierCruComponent,
     ],
   imports: [
     BrowserModule,
@@ -124,7 +122,8 @@ import { SupplierCruComponent } from './components/supplier-configuration/dialog
     ComponentCruComponent,
     MissionCruComponent,
     TaskCruComponent,
-    AreaCruComponent
+    AreaCruComponent,
+    SupplierCruComponent,
   ]
 })
 export class AppModule { }
