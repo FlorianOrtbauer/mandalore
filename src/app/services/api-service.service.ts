@@ -10,18 +10,15 @@ import { IArea } from 'src/classes/interfaces/IArea';
 import { ISite } from 'src/classes/interfaces/ISite';
 import { IClient } from 'src/classes/interfaces/IClient';
 import { IMission } from 'src/classes/interfaces/IMission';
+import { ISupplier } from 'src/classes/interfaces/ISupplier';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-
-
   baseurl = "http://127.0.0.1:8000";
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-
-
 
   constructor(private http: HttpClient) { }
 
@@ -226,4 +223,31 @@ export class ApiService {
         {headers: this.httpHeaders}).subscribe();
     });
   }
+  
+  getAllSuppliers(): Observable<any>{
+    const http$ = this.http.get(this.baseurl+"/millenniumfalcon/suppliers", {headers: this.httpHeaders});
+    return http$;
+  }
+
+  editSupplier(supplier: ISupplier) : void
+  {
+    this.http.put<ISupplier>(this.baseurl+"/millenniumfalcon/suppliers/" + supplier.id + "/", supplier, {headers: this.httpHeaders})
+    .subscribe();
+  }
+  addSupplier(supplier: ISupplier) : void
+  {
+    this.http.post<ISupplier>(this.baseurl+"/millenniumfalcon/suppliers/", supplier, {headers: this.httpHeaders})
+    .subscribe();
+  }
+  deleteSupplier(supplier: ISupplier)
+  {
+    this.http.delete(this.baseurl+"/millenniumfalcon/suppliers/" + supplier.id,  {headers: this.httpHeaders})
+    .subscribe();
+  }
+
+
+
+
+
+
 }
