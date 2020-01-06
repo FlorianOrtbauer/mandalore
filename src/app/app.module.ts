@@ -50,6 +50,10 @@ import { MissionCruComponent } from './components/site-model/dialogs/mission-cru
 import { TaskCruComponent } from './components/site-model/dialogs/task-cru/task-cru.component';
 import { AreasComponent } from './components/client-configuration/areas/areas.component';
 import { AreaCruComponent } from './components/client-configuration/dialogs/area-cru/area-cru.component';
+import { SupplierConfigurationComponent } from './components/supplier-configuration/supplier-configuration.component';
+import { SuppliersComponent } from './components/supplier-configuration/suppliers/suppliers.component';
+import { DialogsComponent } from './components/supplier-configuration/dialogs/dialogs.component';
+import { SupplierCruComponent } from './components/supplier-configuration/dialogs/supplier-cru/supplier-cru.component';
 
 
 @NgModule({
@@ -77,7 +81,11 @@ import { AreaCruComponent } from './components/client-configuration/dialogs/area
         MissionCruComponent,
         TaskCruComponent,
         AreasComponent,
-        AreaCruComponent
+        AreaCruComponent,
+        SupplierConfigurationComponent,
+        SuppliersComponent,
+        DialogsComponent,
+        SupplierCruComponent
     ],
   imports: [
     BrowserModule,
