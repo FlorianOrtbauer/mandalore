@@ -11,7 +11,6 @@ import { ApiService } from 'src/app/services/api-service.service';
 export class SupplierCruComponent implements OnInit {
   
   supplier: ISupplier; 
-  originalSupplier: ISupplier; 
 
   isEdit: boolean; 
   title: string; 
@@ -23,27 +22,30 @@ export class SupplierCruComponent implements OnInit {
     }
 
     ngOnInit() { 
+    //check if supplier to be updated was handed over from suppliers component, if so -> edit
     if(this.data.importedSupplier)
     {
       this.title = "Edit client";
       this.supplier = this.data.importedSupplier; 
-      this.isEdit = true; 
     }
+    // if no supplier was handed over -> create new
     else
     {
       this.title = "Add new client"; 
       this.supplier = {} as ISupplier; 
-      this.isEdit = false; 
     }
       
   }
 
+  // just close the dialog via a button
   cancel() {
     this.dialogRef.close();
   }
 
+  //update or create based on call origin
   save() {
-    if(this.isEdit)
+    //again check if supplier to be updated was handed over
+    if(this.data.importedSupplier)
       this.api.editSupplier(this.supplier); 
     else
       this.api.addSupplier(this.supplier); 

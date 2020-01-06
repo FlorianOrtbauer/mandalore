@@ -34,7 +34,7 @@ export class SuppliersComponent implements OnInit {
 
 /**************************************************************
  * 
- *  Element Selection Logic
+ *  Table Element Selection Logic (pink flag)
  * 
  *************************************************************/
 
@@ -73,7 +73,7 @@ export class SuppliersComponent implements OnInit {
   changeSelectedSuppliers() {
     this.suppliersChanged.emit(this.selection.selected);
   }
-  /* End element selection logic */
+  /* End table element selection logic */
 
 
 /**************************************************************
@@ -122,8 +122,12 @@ export class SuppliersComponent implements OnInit {
   {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
+    //allow esc button closure
+    dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
+
+    //important to handover empty object -- 3h of life wasted on finding that one...
+    //nothing really breaks but input form does not really work in case not handed over.
     dialogConfig.data = {};
 
     this.dialog.open(SupplierCruComponent, dialogConfig);
@@ -132,15 +136,20 @@ export class SuppliersComponent implements OnInit {
     });
   }
 
+  //edit an existing supplier
   openEditSupplierDialog(supplier)
   {
     
     const dialogConfig = new MatDialogConfig();
 
+    // dont allow esc button closure
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+
+    //hand over supplier to be updated
     dialogConfig.data = {importedSupplier: supplier};
 
+    //open dialog
     this.dialog.open(SupplierCruComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(() => {
       setTimeout(() => this.getSuppliers(),1000);
