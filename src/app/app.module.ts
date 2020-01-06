@@ -43,6 +43,7 @@ import { ClientsComponent } from './components/client-configuration/clients/clie
 import { ClientCruComponent } from './components/client-configuration/dialogs/client-cru/client-cru.component';
 import { SitesComponent } from './components/client-configuration/sites/sites.component';
 import { SiteCruComponent } from './components/client-configuration/dialogs/site-cru/site-cru.component';
+import { DeleteDialogComponent } from './components/client-configuration/dialogs/delete-dialog/delete-dialog.component';
 import { LoginComponent } from './components/login/login.component';
 import {TasksComponent} from './components/site-model/tasks/tasks.component';
 import { ComponentCruComponent } from './components/site-model/dialogs/component-cru/component-cru.component';
@@ -74,6 +75,7 @@ import { SupplierCruComponent } from './components/supplier-configuration/dialog
         ClientCruComponent,
         SitesComponent,
         SiteCruComponent,
+        DeleteDialogComponent,
         LoginComponent,
         SystemCruComponent,
         TasksComponent,
@@ -117,6 +119,7 @@ import { SupplierCruComponent } from './components/supplier-configuration/dialog
   entryComponents: [
     ClientCruComponent,
     SiteCruComponent,
+    DeleteDialogComponent,
     SystemCruComponent,
     ComponentCruComponent,
     MissionCruComponent,
