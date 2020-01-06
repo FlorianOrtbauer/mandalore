@@ -234,11 +234,13 @@ export class ApiService {
     this.http.put<ISupplier>(this.baseurl+"/millenniumfalcon/suppliers/" + supplier.id + "/", supplier, {headers: this.httpHeaders})
     .subscribe();
   }
+
   addSupplier(supplier: ISupplier) : void
   {
     this.http.post<ISupplier>(this.baseurl+"/millenniumfalcon/suppliers/", supplier, {headers: this.httpHeaders})
     .subscribe();
   }
+  
   deleteSupplier(supplier: ISupplier)
   {
     this.http.delete(this.baseurl+"/millenniumfalcon/suppliers/" + supplier.id,  {headers: this.httpHeaders})
